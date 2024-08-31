@@ -2,7 +2,7 @@
 import os
 import ast
 
-from mapel.core.glossary import NICE_NAME
+from mapof.core.glossary import NICE_NAME
 
 
 def import_real_instance(experiment, shift=False):

@@ -1,6 +1,6 @@
 
-from mapel.core.glossary import *
-from mapel.core.utils import *
+from mapof.core.glossary import *
+from mapof.core.utils import *
 from collections import Counter
 
 

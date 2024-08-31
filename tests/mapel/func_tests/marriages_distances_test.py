@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 
-import mapel.marriages as mapel
+import mapof.marriages as mapel
 
 registered_marriages_distances_to_test = {
     'l1-mutual_attraction',

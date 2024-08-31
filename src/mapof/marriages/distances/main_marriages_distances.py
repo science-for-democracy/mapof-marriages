@@ -1,9 +1,9 @@
 from typing import Callable, List
 from itertools import combinations, permutations
 
-from mapel.core.matchings import *
-from mapel.marriages.objects.Marriages import Marriages
-from mapel.core.inner_distances import swap_distance
+from mapof.core.matchings import *
+from mapof.marriages.objects.Marriages import Marriages
+from mapof.core.inner_distances import swap_distance
 
 
 # MAIN DISTANCES

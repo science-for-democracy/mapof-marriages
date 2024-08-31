@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
-from mapel.core.objects.Family import Family
-from mapel.marriages.objects.Marriages import Marriages
+from mapof.core.objects.Family import Family
+from mapof.marriages.objects.Marriages import Marriages
 import copy
 
-import mapel.marriages.cultures.mallows as mallows
+import mapof.marriages.cultures.mallows as mallows
 
 
 class MarriagesFamily(Family):

@@ -1,15 +1,15 @@
 
 import ast
-from mapel.core.objects.Instance import Instance
+from mapof.core.objects.Instance import Instance
 
-from mapel.marriages.cultures_ import *
-from mapel.core.glossary import *
-from mapel.core.utils import *
+from mapof.marriages.cultures_ import *
+from mapof.core.glossary import *
+from mapof.core.utils import *
 
-from mapel.roommates.persistence.instance_imports import import_real_instance
-from mapel.marriages.persistence.instance_exports import export_instance_to_a_file
+from mapof.roommates.persistence.instance_imports import import_real_instance
+from mapof.marriages.persistence.instance_exports import export_instance_to_a_file
 
-from mapel.marriages.features_ import get_feature
+from mapof.marriages.features_ import get_feature
 
 
 class Marriages(Instance):

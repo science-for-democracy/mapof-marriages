@@ -1,7 +1,7 @@
 import numpy as np
 import math
 from numpy import linalg
-from mapel.marriages.cultures.mallows import mallows_votes
+from mapof.marriages.cultures.mallows import mallows_votes
 
 
 ################################################################

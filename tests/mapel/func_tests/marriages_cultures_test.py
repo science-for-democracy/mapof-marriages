@@ -2,7 +2,7 @@ import numpy as np
 
 import pytest
 
-import mapel.marriages as mapel
+import mapof.marriages as mapel
 
 registered_marriages_cultures_to_test = {
     'ic',

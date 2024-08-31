@@ -6,15 +6,15 @@ import os
 from multiprocessing import Process
 from time import sleep
 
-from mapel.core.objects.Experiment import Experiment
-from mapel.marriages.objects.MarriagesFamily import MarriagesFamily
-from mapel.marriages.objects.Marriages import Marriages
-import mapel.marriages.distances as metr
-import mapel.marriages.features.basic_features as basic
-import mapel.marriages.features as features
-from mapel.core.persistence.experiment_imports import get_values_from_csv_file
-from mapel.core.utils import make_folder_if_do_not_exist
-import mapel.core.persistence.experiment_exports as exports
+from mapof.core.objects.Experiment import Experiment
+from mapof.marriages.objects.MarriagesFamily import MarriagesFamily
+from mapof.marriages.objects.Marriages import Marriages
+import mapof.marriages.distances as metr
+import mapof.marriages.features.basic_features as basic
+import mapof.marriages.features as features
+from mapof.core.persistence.experiment_imports import get_values_from_csv_file
+from mapof.core.utils import make_folder_if_do_not_exist
+import mapof.core.persistence.experiment_exports as exports
 
 try:
     from sklearn.manifold import MDS

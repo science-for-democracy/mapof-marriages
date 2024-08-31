@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import mapel.marriages.features.experiments_marriage as exp_mar
+import mapof.marriages.features.experiments_marriage as exp_mar
 
 # MAPPING #
 def get_feature(feature_id):

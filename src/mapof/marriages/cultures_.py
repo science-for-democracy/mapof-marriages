@@ -4,10 +4,10 @@ from typing import Union
 
 import numpy as np
 
-import mapel.marriages.cultures.euclidean as euclidean
-import mapel.marriages.cultures.impartial as impartial
-import mapel.marriages.cultures.mallows as mallows
-import mapel.marriages.cultures.urn as urn
+import mapof.marriages.cultures.euclidean as euclidean
+import mapof.marriages.cultures.impartial as impartial
+import mapof.marriages.cultures.mallows as mallows
+import mapof.marriages.cultures.urn as urn
 
 
 def generate_votes(culture_id: str = None,
