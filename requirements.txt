@@ -1,1 +1,1 @@
-mapel-core>=2.0.0
+mapof=0.1.0b2
