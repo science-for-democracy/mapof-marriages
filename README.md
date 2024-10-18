@@ -1,17 +1,18 @@
-# Mapel-marriages
-This pacakge is a plugin for [mapel](https://pypi.org/project/mapel/) extending
-it with necessary files to draw maps of Stable Marriage intances.
+# Mapof-marriages
+This pacakge is a plugin for [Mapof](https://pypi.org/project/mapof/) extending
+it with capabilities of drawing maps of instances of the Stable Marriage
+problem.
 
-For the most recent version of mapel, visit its [git
-repo](https://pypi.org/project/mapel/).
+For the most recent version of Mapof, visit its [git
+repo](https://pypi.org/project/mapof/).
 
 # Installation
-For a simple installation, type:
-`pip install mapel-marriages`
+For a simple installation, type
+`pip install mapof-marriages`
 in the console.
 
-For more complicated variants of installation, refer to the readme of mapel
-[here](https://github.com/szufix/mapel).
+For more complicated variants of installation, refer to the [readme of
+Mapof](https://github.com/science-for-democracy/mapof).
 
 # Acknowledgments
 
