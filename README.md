@@ -1,3 +1,6 @@
+[![Tests](https://github.com/science-for-democracy/mapof-marriages/actions/workflows/python-tests.yml/badge.svg)](https://github.com/science-for-democracy/mapof-marriages/actions/workflows/python-tests.yml)
+[![codecov](https://codecov.io/gh/science-for-democracy/mapof-marriages/graph/badge.svg?token=MB6YOJMFIS)](https://codecov.io/gh/science-for-democracy/mapof-marriages)
+
 # Mapof-marriages
 This pacakge is a plugin for [Mapof](https://pypi.org/project/mapof/) extending
 it with capabilities of drawing maps of instances of the Stable Marriage
