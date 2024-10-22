@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: test-pypi-upload
-      url: https://test.pypi.org/p/mapof-roommates
+      url: https://test.pypi.org/p/mapof-marriages
     permissions:
       id-token: write
     steps:
