@@ -1,4 +1,3 @@
-
 import ast
 from mapof.core.objects.Instance import Instance
 
@@ -6,7 +5,7 @@ from mapof.marriages.cultures_ import *
 from mapof.core.glossary import *
 from mapof.core.utils import *
 
-from mapof.roommates.persistence.instance_imports import import_real_instance
+from mapof.marriages.persistence.instance_imports import import_real_instance
 from mapof.marriages.persistence.instance_exports import export_instance_to_a_file
 
 from mapof.marriages.features_ import get_feature
