@@ -13,21 +13,11 @@ def prepare_offline_marriages_experiment(**kwargs):
     return prepare_marriages_experiment(**kwargs, is_exported=True, is_imported=True)
 
 
-def prepare_marriages_experiment(experiment_id=None,
-                                 instance_type=None,
-                                 distance_id=None,
-                                 is_imported=None,
-                                 is_shifted=False,
-                                 is_exported=None,
-                                 embedding_id=None):
+def prepare_marriages_experiment(**kwargs):
 
-    return MarriagesExperiment(experiment_id=experiment_id,
-                               is_imported=is_imported,
-                               distance_id=distance_id,
-                               instance_type=instance_type,
-                               embedding_id=embedding_id,
-                               is_shifted=is_shifted,
-                               is_exported=is_exported)
+    return MarriagesExperiment(
+        **kwargs
+    )
 
 
 def generate_marriages_instance(**kwargs):

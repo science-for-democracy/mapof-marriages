@@ -1,20 +1,20 @@
-#!/usr/bin/env python
 import ast
 import csv
-import itertools
 import os
+from abc import ABC
 from multiprocessing import Process
 from time import sleep
 
+import mapof.core.persistence.experiment_exports as exports
 from mapof.core.objects.Experiment import Experiment
-from mapof.marriages.objects.MarriagesFamily import MarriagesFamily
-from mapof.marriages.objects.Marriages import Marriages
-import mapof.marriages.distances as metr
-import mapof.marriages.features.basic_features as basic
-import mapof.marriages.features as features
 from mapof.core.persistence.experiment_imports import get_values_from_csv_file
 from mapof.core.utils import make_folder_if_do_not_exist
-import mapof.core.persistence.experiment_exports as exports
+
+import mapof.marriages.distances as metr
+import mapof.marriages.features as features
+import mapof.marriages.features.basic_features as basic
+from mapof.marriages.objects.Marriages import Marriages
+from mapof.marriages.objects.MarriagesFamily import MarriagesFamily
 
 try:
     from sklearn.manifold import MDS
@@ -31,7 +31,7 @@ except ImportError as error:
     print(error)
 
 
-class MarriagesExperiment(Experiment):
+class MarriagesExperiment(Experiment, ABC):
     """Abstract set of elections."""
 
     def __init__(self, **kwargs):
@@ -42,6 +42,24 @@ class MarriagesExperiment(Experiment):
         self.matchings = {}
 
         # election.import_matchings()
+
+    def add_culture(self, name, function):
+        pass
+
+    def add_distance(self, name, function):
+        pass
+
+    def add_feature(self, name, function):
+        pass
+
+    def add_family(self):
+        pass
+
+    def add_instance(self):
+        pass
+
+    def add_folders_to_experiment(self):
+        pass
 
     def import_matchings(self):
         matchings = {}
