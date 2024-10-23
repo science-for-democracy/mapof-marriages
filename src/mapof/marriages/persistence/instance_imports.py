@@ -1,6 +1,5 @@
-
-import os
 import ast
+import os
 
 from mapof.core.glossary import NICE_NAME
 
@@ -11,7 +10,7 @@ def import_real_instance(experiment, shift=False):
     votes = [0, 0]
 
     file_name = f'{experiment.instance_id}.mi'
-    path = os.path.join(os.getcwd(), "election", experiment.experiment_id, "instances", file_name)
+    path = os.path.join(os.getcwd(), "experiments", experiment.experiment_id, "instances", file_name)
     with open(path, 'r') as my_file:
 
         params = 0

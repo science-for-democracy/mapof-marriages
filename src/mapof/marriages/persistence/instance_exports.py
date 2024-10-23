@@ -1,7 +1,5 @@
-
 from mapof.core.glossary import *
 from mapof.core.utils import *
-from collections import Counter
 
 
 def export_instance_to_a_file(experiment):

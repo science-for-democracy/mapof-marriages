@@ -4,6 +4,7 @@ import os
 from time import time
 from typing import Callable
 
+import mapof.core.persistence.experiment_exports as exports
 import numpy as np
 from mapof.core.inner_distances import map_str_to_func
 from mapof.core.objects.Experiment import Experiment
@@ -71,18 +72,21 @@ def run_single_process(exp: Experiment, instances_ids: list,
         times[instance_id_2][instance_id_1] = times[instance_id_1][instance_id_2]
 
 
-def run_multiple_processes(exp: Experiment, instances_ids: list,
-                      distances: dict, times: dict, matchings: dict,
-                      printing: bool, t) -> None:
+def run_multiple_processes(
+        experiment: Experiment,
+        instances_ids: list,
+        distances: dict,
+        times: dict,
+        matchings: dict,
+        process_id: int
+) -> None:
     """ Single thread for computing distances """
 
     for instance_id_1, instance_id_2 in instances_ids:
-        if t == 0 and printing:
-            print(instance_id_1, instance_id_2)
         start_time = time()
-        distance = get_distance(copy.deepcopy(exp.instances[instance_id_1]),
-                                copy.deepcopy(exp.instances[instance_id_2]),
-                                distance_id=copy.deepcopy(exp.distance_id))
+        distance = get_distance(copy.deepcopy(experiment.instances[instance_id_1]),
+                                copy.deepcopy(experiment.instances[instance_id_2]),
+                                distance_id=copy.deepcopy(experiment.distance_id))
         if type(distance) is tuple:
             distance, matching = distance
             matching = np.array(matching)
@@ -93,18 +97,10 @@ def run_multiple_processes(exp: Experiment, instances_ids: list,
         times[instance_id_1][instance_id_2] = time() - start_time
         times[instance_id_2][instance_id_1] = times[instance_id_1][instance_id_2]
 
-    if exp.is_exported:
-        _store_distances(exp, instances_ids, distances, times, t)
+    if experiment.is_exported:
+        exports.export_distances_multiple_processes(experiment,
+                                                    instances_ids,
+                                                    distances,
+                                                    times,
+                                                    process_id)
 
-
-def _store_distances(exp, instances_ids, distances, times, t):
-    """ Store distances to file """
-    file_name = f'{exp.distance_id}_p{t}.csv'
-    path = os.path.join(os.getcwd(), "election", exp.experiment_id, "distances", file_name)
-    with open(path, 'w', newline='') as csv_file:
-        writer = csv.writer(csv_file, delimiter=';')
-        writer.writerow(["instance_id_1", "instance_id_2", "distance", "time"])
-        for election_id_1, election_id_2 in instances_ids:
-            distance = float(distances[election_id_1][election_id_2])
-            time_ = float(times[election_id_1][election_id_2])
-            writer.writerow([election_id_1, election_id_2, distance, time_])
