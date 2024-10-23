@@ -496,27 +496,3 @@ class MarriagesExperiment(Experiment, ABC):
         self.features[feature_id] = feature_dict
         return feature_dict
 
-    def create_structure(self) -> None:
-
-        dirs = ["experiments", "images", "trash"]
-        for dir in dirs:
-            if not os.path.isdir(dir):
-                os.mkdir(os.path.join(os.getcwd(), dir))
-
-        try:
-            os.mkdir(os.path.join(os.getcwd(), "election", self.experiment_id))
-            os.mkdir(os.path.join(os.getcwd(), "election", self.experiment_id, "distances"))
-            os.mkdir(os.path.join(os.getcwd(), "election", self.experiment_id, "features"))
-            os.mkdir(os.path.join(os.getcwd(), "election", self.experiment_id, "coordinates"))
-            os.mkdir(os.path.join(os.getcwd(), "election", self.experiment_id, "instances"))
-            os.mkdir(os.path.join(os.getcwd(), "election", self.experiment_id, "matrices"))
-
-            # PREPARE MAP.CSV FILE
-            path = os.path.join(os.getcwd(), "election", self.experiment_id, "map.csv")
-
-            with open(path, 'w') as file_csv:
-                file_csv.write(
-                    "size;num_agents;culture_id;params;color;alpha;family_id;label;marker;show\n")
-                file_csv.write("10;16;ic;{};black;1;IC;IC;o;process_id\n")
-        except:
-            pass

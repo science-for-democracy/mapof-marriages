@@ -6,12 +6,6 @@ from mapof.marriages.cultures.mallows import mallows_votes
 
 ################################################################
 
-def get_range(params):
-    if params['p_dist'] == 'beta':
-        return np.random.beta(params['a'], params['b'])
-    elif params['p_dist'] == 'uniform':
-        return np.random.uniform(low=params['a'], high=params['b'])
-
 
 def weighted_l1(a1, a2, w):
     total = 0
@@ -236,88 +230,6 @@ def generate_attributes_votes(num_agents: int = None,
 
     return [left_votes, right_votes]
 
-
-#################
-def generate_roommates_radius_votes(num_agents: int = None, params: dict = None):
-    dim = params['dim']
-
-    name = f'{dim}d_{params["space"]}'
-
-    agents = np.array([get_rand(name) for _ in range(num_agents)])
-
-    votes = np.zeros([num_agents, num_agents], dtype=int)
-    distances = np.zeros([num_agents, num_agents], dtype=float)
-
-    rays = np.array([np.random.random() / 2. for _ in range(num_agents)])
-
-    # a_power = np.array([get_range(params) for _ in range(num_agents)])
-
-    for v in range(num_agents):
-        for c in range(num_agents):
-            # if v_range[v] + c_range[c] >= np.linalg.norm(voters[v] - candidates[c]):
-            #     votes[v].add(c)
-            votes[v][c] = c
-            distances[v][c] = np.linalg.norm(agents[v] - agents[c])
-            distances[v][c] = abs(distances[v][c] - rays[c])
-        votes[v] = [x for _, x in sorted(zip(distances[v], votes[v]))]
-
-    return convert(votes)
-
-
-def generate_roommates_double_votes(num_agents: int = None, params: dict = None):
-    dim = params['dim']
-
-    name = f'{dim}d_{params["space"]}'
-
-    agents_reality = np.array([get_rand(name) for _ in range(num_agents)])
-    agents_wishes = np.array([get_rand(name) for _ in range(num_agents)])
-
-    for v in range(num_agents):
-        agents_wishes[v][0] = agents_reality[v][0] + (agents_wishes[v][0] - 0.5) * 1.
-        agents_wishes[v][1] = agents_reality[v][1] + (agents_wishes[v][1] - 0.5) * 1.
-
-    votes = np.zeros([num_agents, num_agents], dtype=int)
-    distances = np.zeros([num_agents, num_agents], dtype=float)
-
-    for v in range(num_agents):
-        for c in range(num_agents):
-            votes[v][c] = c
-            distances[v][c] = np.linalg.norm(agents_reality[v] - agents_wishes[c])
-        votes[v] = [x for _, x in sorted(zip(distances[v], votes[v]))]
-
-    return convert(votes)
-
-
-def generate_roommates_mallows_euclidean_votes(num_agents: int = None, params: dict = None):
-    name = f'{params["dim"]}d_{params["space"]}'
-    # print(name)
-
-    agents = np.array([get_rand(name, i=i, num_agents=num_agents) for i in range(num_agents)])
-
-    votes = np.zeros([num_agents, num_agents], dtype=int)
-    distances = np.zeros([num_agents, num_agents], dtype=float)
-
-    # a_power = np.array([get_range(params) for _ in range(num_agents)])
-
-    for v in range(num_agents):
-        for c in range(num_agents):
-            # if v_range[v] + c_range[c] >= np.linalg.norm(voters[v] - candidates[c]):
-            #     votes[v].add(c)
-            votes[v][c] = c
-            distances[v][c] = np.linalg.norm(agents[v] - agents[c])
-        votes[v] = [x for _, x in sorted(zip(distances[v], votes[v]))]
-
-    votes = mallows_votes(votes, 0.05)
-
-    return convert(votes)
-
-
-# AUXILIARY
-def random_ball(dimension, num_points=1, radius=1):
-    random_directions = np.random.normal(size=(dimension, num_points))
-    random_directions /= linalg.norm(random_directions, axis=0)
-    random_radii = np.random.random(num_points) ** (1 / dimension)
-    return radius * (random_directions * random_radii).T
 
 
 GEN_CTR = 0
