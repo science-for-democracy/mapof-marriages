@@ -31,7 +31,7 @@ class Marriages(Instance):
 
         if is_imported and experiment_id != 'virtual':
             try:
-                self.votes, self.num_agents, self.params, self.model_id = import_real_instance(self)
+                self.votes, self.num_agents, self.params, self.culture_id = import_real_instance(self)
                 self.alpha = self.params['alpha']
             except:
                 pass

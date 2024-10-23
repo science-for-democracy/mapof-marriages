@@ -18,11 +18,11 @@ def import_real_instance(experiment, shift=False):
         first_line = my_file.readline()
 
         if first_line[0] != '#':
-            model_id = 'empty'
+            culture_id = 'empty'
             num_agents = int(first_line)
         else:
             first_line = first_line.strip().split()
-            model_id = first_line[1]
+            culture_id = first_line[1]
 
             if len(first_line) <= 2:
                 params = {}
@@ -61,7 +61,7 @@ def import_real_instance(experiment, shift=False):
 
     rev_NICE_NAME = {v: k for k, v in NICE_NAME.items()}
 
-    if model_id in rev_NICE_NAME:
-        model_id = rev_NICE_NAME[model_id]
+    if culture_id in rev_NICE_NAME:
+        culture_id = rev_NICE_NAME[culture_id]
 
-    return votes, num_agents, params, model_id
+    return votes, num_agents, params, culture_id

@@ -10,6 +10,7 @@ import mapof.core.persistence.experiment_exports as exports
 from mapof.core.objects.Experiment import Experiment
 from mapof.core.persistence.experiment_imports import get_values_from_csv_file
 from mapof.core.utils import make_folder_if_do_not_exist
+from tqdm import tqdm
 
 import mapof.marriages.distances as metr
 import mapof.marriages.features as features
@@ -149,9 +150,6 @@ class MarriagesExperiment(Experiment, ABC):
             single_instance=True,
         )
 
-    def add_folders_to_experiment(self):
-        pass
-
     def import_matchings(self):
         matchings = {}
 
@@ -258,7 +256,7 @@ class MarriagesExperiment(Experiment, ABC):
                         times[row['instance_id_1']][row['instance_id_2']] = float(row['time'])
 
         if self.is_exported:
-            exports.export_distances_to_file(self, distance_id, distances, times)
+            exports.export_distances_to_file(self, distance_id, distances, times, ids)
 
         self.distances = distances
         self.times = times
@@ -269,7 +267,7 @@ class MarriagesExperiment(Experiment, ABC):
 
         families = {}
 
-        path = os.path.join(os.getcwd(), 'election', self.experiment_id, 'map.csv')
+        path = os.path.join(os.getcwd(), 'experiments', self.experiment_id, 'map.csv')
         file_ = open(path, 'r')
 
         header = [h.strip() for h in file_.readline().split(';')]
@@ -278,7 +276,7 @@ class MarriagesExperiment(Experiment, ABC):
         starting_from = 0
         for row in reader:
 
-            model_id = None
+            culture_id = None
             color = None
             label = None
             params = None
@@ -290,7 +288,7 @@ class MarriagesExperiment(Experiment, ABC):
             show = True
 
             if 'culture_id' in row.keys():
-                model_id = str(row['culture_id']).strip()
+                culture_id = str(row['culture_id']).strip()
 
             if 'color' in row.keys():
                 color = str(row['color']).strip()
@@ -324,7 +322,7 @@ class MarriagesExperiment(Experiment, ABC):
 
             single_instance = size == 1
 
-            families[family_id] = MarriagesFamily(culture_id=model_id,
+            families[family_id] = MarriagesFamily(culture_id=culture_id,
                                                   family_id=family_id,
                                                   params=params, label=label,
                                                   color=color, alpha=alpha, show=show,
@@ -341,12 +339,42 @@ class MarriagesExperiment(Experiment, ABC):
         file_.close()
         return families
 
+    def add_folders_to_experiment(self) -> None:
+
+        dirs = ["experiments"]
+        for dir in dirs:
+            if not os.path.isdir(dir):
+                os.mkdir(os.path.join(os.getcwd(), dir))
+
+        if not os.path.isdir(os.path.join(os.getcwd(), "experiments", self.experiment_id)):
+            os.mkdir(os.path.join(os.getcwd(), "experiments", self.experiment_id))
+
+        list_of_folders = ['distances',
+                           'features',
+                           'coordinates',
+                           'instances']
+
+        for folder_name in list_of_folders:
+            if not os.path.isdir(os.path.join(os.getcwd(), "experiments",
+                                              self.experiment_id, folder_name)):
+                os.mkdir(os.path.join(os.getcwd(), "experiments",
+                                      self.experiment_id, folder_name))
+
+        path = os.path.join(os.getcwd(), "experiments", self.experiment_id, "map.csv")
+        if not os.path.exists(path):
+
+            with open(path, 'w') as file_csv:
+                file_csv.write(
+                    "size;num_agents;culture_id;params;color;alpha;"
+                    "family_id;label;marker\n")
+                file_csv.write("3;10;ic;{};black;1;ic;Impartial Culture;o\n")
+
     def prepare_instances(self):
 
         if self.instances is None:
             self.instances = {}
 
-        for family_id in self.families:
+        for family_id in tqdm(self.families, desc="Preparing instances"):
 
             new_instances = self.families[family_id].prepare_family(
                 is_exported=self.is_exported,

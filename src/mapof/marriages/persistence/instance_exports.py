@@ -7,16 +7,16 @@ from collections import Counter
 def export_instance_to_a_file(experiment):
     """ Store votes in a file """
 
-    path_to_folder = os.path.join(os.getcwd(), "election", experiment.experiment_id, "instances")
+    path_to_folder = os.path.join(os.getcwd(), "experiments", experiment.experiment_id, "instances")
     make_folder_if_do_not_exist(path_to_folder)
     path_to_file = os.path.join(path_to_folder, f'{experiment.instance_id}.mi')
 
     with open(path_to_file, 'w') as file_:
 
-        if experiment.model_id in NICE_NAME:
-            file_.write("# " + NICE_NAME[experiment.model_id] + " " + str(experiment.params) + "\n")
+        if experiment.culture_id in NICE_NAME:
+            file_.write("# " + NICE_NAME[experiment.culture_id] + " " + str(experiment.params) + "\n")
         else:
-            file_.write("# " + experiment.model_id + " " + str(experiment.params) + "\n")
+            file_.write("# " + experiment.culture_id + " " + str(experiment.params) + "\n")
 
         for s in range(2):
 
