@@ -1,6 +1,6 @@
+import mapof.core.features.mallows as ml
 
 from mapof.marriages.cultures.impartial import generate_asymmetric_votes
-import mapof.core.features.mallows as ml
 
 
 def generate_mallows_votes(*args, **kwargs):

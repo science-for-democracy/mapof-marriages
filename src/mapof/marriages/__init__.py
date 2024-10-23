@@ -1,8 +1,8 @@
 
 from .objects.MarriagesExperiment import MarriagesExperiment
 from .objects.Marriages import Marriages
-from . import cultures_ as cult
-from .distances_ import get_distance
+from .cultures import generate_votes
+from .distances import get_distance
 
 
 def prepare_online_marriages_experiment(**kwargs):
@@ -37,7 +37,7 @@ def generate_marriages_instance(**kwargs):
 
 
 def generate_marriages_votes(**kwargs):
-    return cult.generate_votes(**kwargs)
+    return generate_votes(**kwargs)
 
 
 def compute_distance(*args, **kwargs):

@@ -1,14 +1,9 @@
-import ast
 from mapof.core.objects.Instance import Instance
 
-from mapof.marriages.cultures_ import *
-from mapof.core.glossary import *
-from mapof.core.utils import *
-
-from mapof.marriages.persistence.instance_imports import import_real_instance
+from mapof.marriages.cultures import *
+from mapof.marriages.features import get_feature
 from mapof.marriages.persistence.instance_exports import export_instance_to_a_file
-
-from mapof.marriages.features_ import get_feature
+from mapof.marriages.persistence.instance_imports import import_real_instance
 
 
 class Marriages(Instance):
@@ -96,15 +91,10 @@ class Marriages(Instance):
 
         return matrix
 
-    # PREPARE INSTANCE
     def prepare_instance(self, is_exported=None, params: dict = None):
         if params is None:
             params = {}
 
-        # if election.culture_id == 'norm-mallows' and 'norm-phi' not in params:
-        #     params['norm-phi'] = np.random.rand()
-        # elif election.culture_id == 'urn' and 'alpha' not in params:
-        #     params['alpha'] = np.random.rand()
         if 'norm-phi' in params:
             params['alpha'] = params['norm-phi']
         else:
@@ -116,7 +106,6 @@ class Marriages(Instance):
 
         if is_exported:
             export_instance_to_a_file(self)
-
 
     def compute_feature(self, feature_id, feature_long_id=None, **kwargs):
         if feature_long_id is None:
