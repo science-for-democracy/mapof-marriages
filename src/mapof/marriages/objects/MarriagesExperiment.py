@@ -191,16 +191,12 @@ class MarriagesExperiment(Experiment, ABC):
 
         return instances
 
-    def compute_distances(self, distance_id: str = 'emd-positionwise', num_processes: int = 1,
+    def compute_distances(self, distance_id: str = '1-mutual_attraction', num_processes: int = 1,
                           self_distances: bool = False, vector_type: str = 'A',
                           printing: bool = False) -> None:
         """ Compute distances between elections (using processes) """
 
         self.distance_id = distance_id
-
-        if '-pairwise' in distance_id:
-            for instance in self.instances.values():
-                instance.votes_to_pairwise_matrix()
 
         matchings = {election_id: {} for election_id in self.instances}
         distances = {election_id: {} for election_id in self.instances}

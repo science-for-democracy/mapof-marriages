@@ -83,7 +83,7 @@ class Marriages(Instance):
     def votes_to_pairwise_matrix(self) -> np.ndarray:
         """ convert VOTES to pairwise MATRIX """
         matrix = np.zeros([self.num_agents, self.num_agents])
-
+        print(self.votes)
         for v in range(self.num_agents):
             for c1 in range(self.num_agents - 1):
                 for c2 in range(c1 + 1, self.num_agents - 1):
