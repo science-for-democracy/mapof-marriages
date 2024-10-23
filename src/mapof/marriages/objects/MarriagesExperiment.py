@@ -4,6 +4,7 @@ import os
 from abc import ABC
 from multiprocessing import Process
 from time import sleep
+import copy
 
 import mapof.core.persistence.experiment_exports as exports
 from mapof.core.objects.Experiment import Experiment
@@ -52,11 +53,101 @@ class MarriagesExperiment(Experiment, ABC):
     def add_feature(self, name, function):
         pass
 
-    def add_family(self):
-        pass
+    def add_family(self,
+                   culture_id: str = "none",
+                   instance_id: str = None,
+                   params: dict = None,
+                   size: int = 1,
+                   label: str = None,
+                   color: str = "black",
+                   alpha: float = 1.,
+                   show: bool = True,
+                   marker: str = 'o',
+                   family_id: str = None,
+                   single_instance: bool = False,
+                   num_agents: int = None,
+                   path: dict = None):
 
-    def add_instance(self):
-        pass
+        if instance_id is not None:
+            family_id = instance_id
+
+        if num_agents is None:
+            num_agents = self.default_num_agents
+
+        if self.families is None:
+            self.families = {}
+
+        if params is None:
+            params = {}
+
+        if family_id is None:
+            family_id = culture_id + '_' + str(num_agents)
+
+        if label is None:
+            label = family_id
+
+        self.families[family_id] = MarriagesFamily(
+            culture_id=culture_id,
+            family_id=family_id,
+            params=params,
+            label=label,
+            color=color,
+            alpha=alpha,
+            single=single_instance,
+            show=show,
+            size=size,
+            marker=marker,
+            num_agents=num_agents,
+            path=path
+        )
+
+        self.num_families = len(self.families)
+        self.num_instances = sum([self.families[family_id].size for family_id in self.families])
+
+        new_instances = self.families[family_id].prepare_family(
+            is_exported=self.is_exported,
+            experiment_id=self.experiment_id)
+
+        for instance_id in new_instances:
+            self.instances[instance_id] = new_instances[instance_id]
+
+        self.families[family_id].instance_ids = list(new_instances.keys())
+
+        # if self.is_exported:
+        #     self.update_map_csv()  # To be implemented
+
+        return list(new_instances.keys())
+
+    def add_instance(self,
+                     culture_id="none",
+                     params=None,
+                     label=None,
+                     color="black",
+                     alpha=1.,
+                     show=True,
+                     marker='x',
+                     starting_from=0,
+                     size=1,
+                     num_agents=None,
+                     instance_id=None):
+
+        if num_agents is None:
+            num_agents = self.default_num_agents
+
+        return self.add_family(
+            culture_id=culture_id,
+            instance_id=instance_id,
+            params=params,
+            size=size,
+            label=label,
+            color=color,
+            alpha=alpha,
+            show=show,
+            marker=marker,
+            family_id=instance_id,
+            num_agents=num_agents,
+            single_instance=True,
+        )
 
     def add_folders_to_experiment(self):
         pass
@@ -198,7 +289,6 @@ class MarriagesExperiment(Experiment, ABC):
             family_id = None
             show = True
 
-
             if 'culture_id' in row.keys():
                 model_id = str(row['culture_id']).strip()
 
@@ -234,7 +324,7 @@ class MarriagesExperiment(Experiment, ABC):
 
             single_instance = size == 1
 
-            families[family_id] = MarriagesFamily(model_id=model_id,
+            families[family_id] = MarriagesFamily(culture_id=model_id,
                                                   family_id=family_id,
                                                   params=params, label=label,
                                                   color=color, alpha=alpha, show=show,
@@ -267,7 +357,6 @@ class MarriagesExperiment(Experiment, ABC):
 
     def compute_stable_sr(self):
         for instance_id in self.instances:
-            print(instance_id)
             if instance_id in ['roommates_test']:
                 self.matchings[instance_id] = 'None'
             else:
@@ -300,8 +389,6 @@ class MarriagesExperiment(Experiment, ABC):
         features_with_time = {}
         features_with_std = {'avg_num_of_bps_for_rand_matching',
                              'avg_number_of_bps_for_random_matching'}
-
-        # print(election.matchings)
 
         if feature_id == 'summed_rank_difference':
             minimal = get_values_from_csv_file(self, feature_id='summed_rank_minimal_matching')
@@ -370,11 +457,13 @@ class MarriagesExperiment(Experiment, ABC):
                 if feature_id in features_with_time:
                     writer.writerow(["instance_id", "value", 'time'])
                     for key in feature_dict['value']:
-                        writer.writerow([key, feature_dict['value'][key], round(feature_dict['time'][key],3)])
+                        writer.writerow(
+                            [key, feature_dict['value'][key], round(feature_dict['time'][key], 3)])
                 elif feature_id in features_with_std:
                     writer.writerow(["instance_id", "value", 'std'])
                     for key in feature_dict['value']:
-                        writer.writerow([key, feature_dict['value'][key], round(feature_dict['std'][key],3)])
+                        writer.writerow(
+                            [key, feature_dict['value'][key], round(feature_dict['std'][key], 3)])
                 else:
                     writer.writerow(["instance_id", "value"])
                     for key in feature_dict['value']:
@@ -402,7 +491,8 @@ class MarriagesExperiment(Experiment, ABC):
             path = os.path.join(os.getcwd(), "election", self.experiment_id, "map.csv")
 
             with open(path, 'w') as file_csv:
-                file_csv.write("size;num_agents;culture_id;params;color;alpha;family_id;label;marker;show\n")
+                file_csv.write(
+                    "size;num_agents;culture_id;params;color;alpha;family_id;label;marker;show\n")
                 file_csv.write("10;16;ic;{};black;1;IC;IC;o;process_id\n")
         except:
             pass

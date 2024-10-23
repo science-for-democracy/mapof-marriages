@@ -5,12 +5,12 @@ from mapof.marriages.objects.Marriages import Marriages
 import copy
 
 import mapof.marriages.cultures.mallows as mallows
-
+from mapof.core.utils import *
 
 class MarriagesFamily(Family):
 
     def __init__(self,
-                 model_id: str = None,
+                 culture_id: str = None,
                  family_id='none',
                  params: dict = None,
                  size: int = 1,
@@ -26,7 +26,7 @@ class MarriagesFamily(Family):
 
                  num_agents: int = None):
 
-        super().__init__(model_id=model_id,
+        super().__init__(culture_id=culture_id,
                          family_id=family_id,
                          params=params,
                          size=size,
@@ -69,17 +69,19 @@ class MarriagesFamily(Family):
 
         return params, variable
 
-    def prepare_family(self, experiment_id=None, store=None):
-
-        print(self.num_agents)
-        params = copy.deepcopy(self.params)
+    def prepare_family(self,
+                       experiment_id=None,
+                       is_exported=True):
 
         instances = {}
-
         _keys = []
+
         for j in range(self.size):
 
+            params = copy.deepcopy(self.params)
+
             path = self.path
+            variable = None
             if path is not None and 'variable' in path:
                 new_params, variable = self._get_params_for_paths(j)
                 params = {**params, **new_params}
@@ -88,18 +90,21 @@ class MarriagesFamily(Family):
                 params['phi'] = mallows.phi_from_relphi(self.num_agents,
                                                         relphi=params['norm-phi'])
 
-            if self.single:
-                instance_id = self.family_id
-            else:
-                instance_id = self.family_id + '_' + str(j)
+            instance_id = get_instance_id(self.single, self.family_id, j)
 
-            instance = Marriages(experiment_id, instance_id, is_imported=False,
-                                 culture_id=self.model_id, num_agents=self.num_agents)
+            instance = Marriages(experiment_id,
+                                 instance_id,
+                                 culture_id=self.culture_id,
+                                 num_agents=self.num_agents,
+                                 label=self.label,
+                                 variable=variable,
+                                 is_imported=False,
+                                 **params)
 
-            instance.prepare_instance(store=store, params=params)
+
+            instance.prepare_instance(is_exported=is_exported)
 
             instances[instance_id] = instance
-
             _keys.append(instance_id)
 
         self.instance_ids = _keys

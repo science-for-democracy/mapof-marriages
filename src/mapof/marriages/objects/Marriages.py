@@ -2,7 +2,7 @@ from mapof.core.objects.Instance import Instance
 
 from mapof.marriages.cultures import *
 from mapof.marriages.features import get_feature
-from mapof.marriages.persistence.instance_exports import export_instance_to_a_file
+import mapof.marriages.persistence.instance_exports as exports
 from mapof.marriages.persistence.instance_imports import import_real_instance
 
 
@@ -12,11 +12,16 @@ class Marriages(Instance):
                  experiment_id,
                  instance_id,
                  alpha=1,
+                 label=None,
                  culture_id=None,
                  num_agents=None,
-                 is_imported=True, votes=None):
+                 is_imported=True,
+                 votes=None,
+                 variable=None):
 
         super().__init__(experiment_id, instance_id, alpha=alpha, culture_id=culture_id)
+
+        self.variable = variable
 
         self.num_agents = num_agents
         self.votes = votes
@@ -91,21 +96,21 @@ class Marriages(Instance):
 
         return matrix
 
-    def prepare_instance(self, is_exported=None, params: dict = None):
-        if params is None:
-            params = {}
+    def prepare_instance(self, is_exported=None):
 
-        if 'norm-phi' in params:
-            params['alpha'] = params['norm-phi']
+        if 'norm-phi' in self.params:  # for backward compatibility
+            self.params['alpha'] = self.params['norm-phi']
         else:
-            params['alpha'] = 1
+            self.params['alpha'] = 1
 
-        self.params = params
-        self.alpha = params['alpha']
-        self.votes = generate_votes(culture_id=self.culture_id, num_agents=self.num_agents, params=params)
+        self.votes = generate_votes(culture_id=self.culture_id,
+                                    num_agents=self.num_agents,
+                                    params=self.params)
 
         if is_exported:
-            export_instance_to_a_file(self)
+            exports.export_instance_to_a_file(self)
+
+
 
     def compute_feature(self, feature_id, feature_long_id=None, **kwargs):
         if feature_long_id is None:
