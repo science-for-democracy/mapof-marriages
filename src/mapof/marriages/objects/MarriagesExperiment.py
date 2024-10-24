@@ -150,23 +150,6 @@ class MarriagesExperiment(Experiment, ABC):
             single_instance=True,
         )
 
-    def import_matchings(self):
-        matchings = {}
-
-        path = os.path.join(os.getcwd(), 'experiments', self.experiment_id, 'features',
-                            'stable_sr.csv')
-        with open(path, 'r', newline='') as csv_file:
-            reader = csv.DictReader(csv_file, delimiter=';')
-
-            for row in reader:
-                instance_id = row['instance_id']
-                value = row['matching']
-                if value == '':
-                    matchings[instance_id] = None
-                else:
-                    matchings[instance_id] = value
-
-        self.matchings = matchings
 
     def add_instances_to_experiment(self):
 
@@ -383,30 +366,6 @@ class MarriagesExperiment(Experiment, ABC):
 
             for instance_id in new_instances:
                 self.instances[instance_id] = new_instances[instance_id]
-
-    def compute_stable_sr(self):
-        for instance_id in self.instances:
-            if instance_id in ['roommates_test']:
-                self.matchings[instance_id] = 'None'
-            else:
-                usable_matching = basic.compute_stable_SR(self.instances[instance_id].votes)
-                self.matchings[instance_id] = usable_matching
-
-        if self.is_exported:
-
-            path_to_folder = os.path.join(os.getcwd(), "experiments", self.experiment_id,
-                                          "features")
-            make_folder_if_do_not_exist(path_to_folder)
-            path_to_file = os.path.join(path_to_folder, f'stable_sr.csv')
-
-            with open(path_to_file, 'w', newline='') as csv_file:
-                writer = csv.writer(csv_file, delimiter=';')
-                writer.writerow(
-                    ["instance_id", "matching"])
-
-                for instance_id in self.instances:
-                    usable_matching = self.matchings[instance_id]
-                    writer.writerow([instance_id, usable_matching])
 
     def compute_feature(self, feature_id: str = None, feature_params=None) -> dict:
 

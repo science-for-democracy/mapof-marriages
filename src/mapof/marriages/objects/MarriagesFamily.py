@@ -69,7 +69,6 @@ class MarriagesFamily(Family):
                                  is_imported=False,
                                  **params)
 
-
             instance.prepare_instance(is_exported=is_exported)
 
             instances[instance_id] = instance
