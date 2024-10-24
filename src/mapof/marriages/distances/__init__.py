@@ -50,8 +50,7 @@ def run_single_process(exp: Experiment, instances_ids: list,
     """ Single thread for computing distances """
 
     for instance_id_1, instance_id_2 in instances_ids:
-        if printing:
-            print(instance_id_1, instance_id_2)
+
         start_time = time()
         distance = get_distance(copy.deepcopy(exp.instances[instance_id_1]),
                                 copy.deepcopy(exp.instances[instance_id_2]),

@@ -153,18 +153,18 @@ class MarriagesExperiment(Experiment, ABC):
     def import_matchings(self):
         matchings = {}
 
-        path = os.path.join(os.getcwd(), 'election', self.experiment_id, 'features',
+        path = os.path.join(os.getcwd(), 'experiments', self.experiment_id, 'features',
                             'stable_sr.csv')
         with open(path, 'r', newline='') as csv_file:
             reader = csv.DictReader(csv_file, delimiter=';')
 
             for row in reader:
-                election_id = row['instance_id']
+                instance_id = row['instance_id']
                 value = row['matching']
                 if value == '':
-                    matchings[election_id] = None
+                    matchings[instance_id] = None
                 else:
-                    matchings[election_id] = value
+                    matchings[instance_id] = value
 
         self.matchings = matchings
 
@@ -176,16 +176,16 @@ class MarriagesExperiment(Experiment, ABC):
 
             ids = []
             if self.families[family_id].single:
-                election_id = family_id
-                election = Marriages(self.experiment_id, election_id)
-                instances[election_id] = election
-                ids.append(str(election_id))
+                instance_id = family_id
+                instance = Marriages(self.experiment_id, instance_id)
+                instances[instance_id] = instance
+                ids.append(str(instance_id))
             else:
                 for j in range(self.families[family_id].size):
-                    election_id = family_id + '_' + str(j)
-                    election = Marriages(self.experiment_id, election_id)
-                    instances[election_id] = election
-                    ids.append(str(election_id))
+                    instance_id = family_id + '_' + str(j)
+                    instance = Marriages(self.experiment_id, instance_id)
+                    instances[instance_id] = instance
+                    ids.append(str(instance_id))
 
             self.families[family_id].instance_ids = ids
 
@@ -194,22 +194,22 @@ class MarriagesExperiment(Experiment, ABC):
     def compute_distances(self, distance_id: str = '1-mutual_attraction', num_processes: int = 1,
                           self_distances: bool = False, vector_type: str = 'A',
                           printing: bool = False) -> None:
-        """ Compute distances between elections (using processes) """
+        """ Compute distances between instances (using processes) """
 
         self.distance_id = distance_id
 
-        matchings = {election_id: {} for election_id in self.instances}
-        distances = {election_id: {} for election_id in self.instances}
-        times = {election_id: {} for election_id in self.instances}
+        matchings = {instance_id: {} for instance_id in self.instances}
+        distances = {instance_id: {} for instance_id in self.instances}
+        times = {instance_id: {} for instance_id in self.instances}
 
         ids = []
-        for i, election_1 in enumerate(self.instances):
-            for j, election_2 in enumerate(self.instances):
+        for i, instance_1 in enumerate(self.instances):
+            for j, instance_2 in enumerate(self.instances):
                 if i == j:
                     if self_distances:
-                        ids.append((election_1, election_2))
+                        ids.append((instance_1, instance_2))
                 elif i < j:
-                    ids.append((election_1, election_2))
+                    ids.append((instance_1, instance_2))
 
         num_distances = len(ids)
 
@@ -240,7 +240,7 @@ class MarriagesExperiment(Experiment, ABC):
             for t in range(num_processes):
 
                 file_name = f'{distance_id}_p{t}.csv'
-                path = os.path.join(os.getcwd(), "election", self.experiment_id, "distances",
+                path = os.path.join(os.getcwd(), "experiments", self.experiment_id, "distances",
                                     file_name)
 
                 with open(path, 'r', newline='') as csv_file:
@@ -389,7 +389,7 @@ class MarriagesExperiment(Experiment, ABC):
 
         if self.is_exported:
 
-            path_to_folder = os.path.join(os.getcwd(), "election", self.experiment_id,
+            path_to_folder = os.path.join(os.getcwd(), "experiments", self.experiment_id,
                                           "features")
             make_folder_if_do_not_exist(path_to_folder)
             path_to_file = os.path.join(path_to_folder, f'stable_sr.csv')
@@ -429,35 +429,9 @@ class MarriagesExperiment(Experiment, ABC):
         else:
 
             for instance_id in self.instances:
-                print(instance_id)
                 feature = features.get_feature(feature_id)
                 instance = self.instances[instance_id]
-                # if feature_id in ['summed_rank_minimal_matching'] \
-                #         and election.matchings[instance_id] is None:
-                #     value = 'None'
-                # else:
                 value = feature(instance.votes)
-                print(value)
-                #
-                # elif feature_id in ['largest_cohesive_group', 'number_of_cohesive_groups',
-                #                     'number_of_cohesive_groups_brute',
-                #                     'proportionality_degree_pav',
-                #                     'proportionality_degree_av',
-                #                     'proportionality_degree_cc',
-                #                     'justified_ratio',
-                #                     'cohesiveness',
-                #                     'partylist',
-                #                     'highest_cc_score',
-                #                     'highest_hb_score']:
-                #     value = feature(election, feature_params)
-                #
-                # elif feature_id in {'avg_distortion_from_guardians',
-                #                     'worst_distortion_from_guardians',
-                #                     'distortion_from_all',
-                #                     'distortion_from_top_100'}:
-                #     value = feature(election, election_id)
-                # else:
-                #     value = feature(election)
 
                 if feature_id in features_with_time:
                     feature_dict['value'][instance_id] = value[0]
@@ -470,7 +444,7 @@ class MarriagesExperiment(Experiment, ABC):
 
         if self.is_exported:
 
-            path_to_folder = os.path.join(os.getcwd(), "election", self.experiment_id,
+            path_to_folder = os.path.join(os.getcwd(), "experiments", self.experiment_id,
                                           "features")
             make_folder_if_do_not_exist(path_to_folder)
             path_to_file = os.path.join(path_to_folder, f'{feature_id}.csv')

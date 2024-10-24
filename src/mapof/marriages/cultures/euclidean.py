@@ -235,9 +235,9 @@ def generate_attributes_votes(num_agents: int = None,
 GEN_CTR = 0
 
 
-def get_rand(model: str, i: int = 0, num_agents: int = 0, cat: str = "voters") -> list:
+# UPDATE THIS TO MATCH THE RESAMPLING APPROACH
+def get_rand(model: str, i: int = 0, num_agents: int = 0) -> list:
     """ generate random values"""
-    # print(model ==  "1d_uniform")
 
     point = [0]
     if model in {"1d_uniform", "1d_interval"}:
@@ -262,13 +262,6 @@ def get_rand(model: str, i: int = 0, num_agents: int = 0, cat: str = "voters") -
         phi = 2.0 * 180.0 * np.random.random()
         radius = math.sqrt(np.random.random()) * 0.5
         point = [0.5 + radius * math.cos(phi), 0.5 + radius * math.sin(phi)]
-    elif model == "2d_range_overlapping":
-        phi = 2.0 * 180.0 * np.random.random()
-        radius = math.sqrt(np.random.random()) * 0.5
-        if cat == "voters":
-            point = [0.25 + radius * math.cos(phi), 0.5 + radius * math.sin(phi)]
-        elif cat == "candidates":
-            point = [0.75 + radius * math.cos(phi), 0.5 + radius * math.sin(phi)]
     elif model in {"2d_square", "2d_uniform"}:
         point = [np.random.random(), np.random.random()]
     elif model in {'2d_asymmetric'}:
@@ -281,21 +274,10 @@ def get_rand(model: str, i: int = 0, num_agents: int = 0, cat: str = "voters") -
         x = 1. * math.cos(alpha)
         y = 1. * math.sin(alpha)
         point = [x, y]
-    elif model in ["2d_gaussian", "2d_range_gaussian"]:
+    elif model in ["2d_gaussian"]:
         point = [np.random.normal(0.5, 0.15), np.random.normal(0.5, 0.15)]
         while np.linalg.norm(point - np.array([0.5, 0.5])) > 0.5:
             point = [np.random.normal(0.5, 0.15), np.random.normal(0.5, 0.15)]
-    elif model in ["2d_range_fourgau"]:
-        r = np.random.randint(1, 4)
-        size = 0.06
-        if r == 1:
-            point = [np.random.normal(0.25, size), np.random.normal(0.5, size)]
-        if r == 2:
-            point = [np.random.normal(0.5, size), np.random.normal(0.75, size)]
-        if r == 3:
-            point = [np.random.normal(0.75, size), np.random.normal(0.5, size)]
-        if r == 4:
-            point = [np.random.normal(0.5, size), np.random.normal(0.25, size)]
     elif model in ["3d_cube", "3d_uniform"]:
         point = [np.random.random(), np.random.random(), np.random.random()]
     elif model in ["5d_uniform"]:
@@ -323,18 +305,6 @@ def get_rand(model: str, i: int = 0, num_agents: int = 0, cat: str = "voters") -
     elif model == "5d_cube":
         dim = 5
         point = [np.random.random() for _ in range(dim)]
-    elif model == '1d_extreme':
-        if i % 2 == 1:
-            i -= 0.1
-        point = i
-    elif model == '2d_extreme':
-        if i % 2 == 1:
-            alpha = 2 * math.pi * ((i - np.random.random() / 100) / num_agents)
-        else:
-            alpha = 2 * math.pi * ((i + np.random.random() / 100) / num_agents)
-        x = 1. * math.cos(alpha)
-        y = 1. * math.sin(alpha)
-        point = [x, y]
     else:
         print('unknown culture_id', model)
         point = [0, 0]
