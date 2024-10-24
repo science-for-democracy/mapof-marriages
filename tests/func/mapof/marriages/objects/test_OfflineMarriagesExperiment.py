@@ -25,4 +25,13 @@ class TestOfflineMarriagesExperiment:
         self.experiment.embed_2d(embedding_id="kk")
         self.experiment.print_map_2d(show=False)
 
+    def test_compute_feature(self):
+        self.experiment.prepare_instances()
+        self.experiment.compute_distances(distance_id='l1-mutual_attraction')
+        self.experiment.embed_2d(embedding_id='kk')
+
+        feature_id = 'summed_rank_minimal_matching'
+        self.experiment.compute_feature(feature_id=feature_id)
+
+
 

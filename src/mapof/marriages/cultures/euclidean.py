@@ -231,11 +231,8 @@ def generate_attributes_votes(num_agents: int = None,
     return [left_votes, right_votes]
 
 
-
-GEN_CTR = 0
-
-
-# UPDATE THIS TO MATCH THE RESAMPLING APPROACH
+####################################################
+### UPDATE THIS TO MATCH THE RESAMPLING APPROACH ###
 def get_rand(model: str, i: int = 0, num_agents: int = 0) -> list:
     """ generate random values"""
 
@@ -251,60 +248,60 @@ def get_rand(model: str, i: int = 0, num_agents: int = 0) -> list:
         point = np.random.normal(0.5, 0.15)
         while point > 1 or point < 0:
             point = np.random.normal(0.5, 0.15)
-    elif model == "1d_one_sided_triangle":
-        point = np.random.uniform(0, 1) ** 0.5
-    elif model == "1d_full_triangle":
-        point = np.random.choice(
-            [np.random.uniform(0, 1) ** 0.5, 2 - np.random.uniform(0, 1) ** 0.5])
-    elif model == "1d_two_party":
-        point = np.random.choice([np.random.uniform(0, 1), np.random.uniform(2, 3)])
-    elif model in {"2d_disc", "2d_range_disc"}:
+    # elif model == "1d_one_sided_triangle":
+    #     point = np.random.uniform(0, 1) ** 0.5
+    # elif model == "1d_full_triangle":
+    #     point = np.random.choice(
+    #         [np.random.uniform(0, 1) ** 0.5, 2 - np.random.uniform(0, 1) ** 0.5])
+    # elif model == "1d_two_party":
+    #     point = np.random.choice([np.random.uniform(0, 1), np.random.uniform(2, 3)])
+    elif model in {"2d_disc"}:
         phi = 2.0 * 180.0 * np.random.random()
         radius = math.sqrt(np.random.random()) * 0.5
         point = [0.5 + radius * math.cos(phi), 0.5 + radius * math.sin(phi)]
     elif model in {"2d_square", "2d_uniform"}:
         point = [np.random.random(), np.random.random()]
-    elif model in {'2d_asymmetric'}:
-        if np.random.rand() < 0.3:
-            return np.random.normal(loc=0.25, scale=0.15, size=2)
-        else:
-            return np.random.normal(loc=0.75, scale=0.15, size=2)
-    elif model == "2d_sphere":
-        alpha = 2 * math.pi * np.random.random()
-        x = 1. * math.cos(alpha)
-        y = 1. * math.sin(alpha)
-        point = [x, y]
-    elif model in ["2d_gaussian"]:
-        point = [np.random.normal(0.5, 0.15), np.random.normal(0.5, 0.15)]
-        while np.linalg.norm(point - np.array([0.5, 0.5])) > 0.5:
-            point = [np.random.normal(0.5, 0.15), np.random.normal(0.5, 0.15)]
-    elif model in ["3d_cube", "3d_uniform"]:
-        point = [np.random.random(), np.random.random(), np.random.random()]
-    elif model in ["5d_uniform"]:
-        dim = 5
-        point = [np.random.random() for _ in range(dim)]
-    elif model in ["10d_uniform"]:
-        dim = 10
-        point = [np.random.random() for _ in range(dim)]
-    elif model in {'3d_asymmetric'}:
-        if np.random.rand() < 0.3:
-            return np.random.normal(loc=0.25, scale=0.15, size=3)
-        else:
-            return np.random.normal(loc=0.75, scale=0.15, size=3)
-    elif model in ['3d_gaussian']:
-        point = [np.random.normal(0.5, 0.15),
-                 np.random.normal(0.5, 0.15),
-                 np.random.normal(0.5, 0.15)]
-        while np.linalg.norm(point - np.array([0.5, 0.5, 0.5])) > 0.5:
-            point = [np.random.normal(0.5, 0.15),
-                     np.random.normal(0.5, 0.15),
-                     np.random.normal(0.5, 0.15)]
-    elif model == "4d_cube":
-        dim = 4
-        point = [np.random.random() for _ in range(dim)]
-    elif model == "5d_cube":
-        dim = 5
-        point = [np.random.random() for _ in range(dim)]
+    # elif model in {'2d_asymmetric'}:
+    #     if np.random.rand() < 0.3:
+    #         return np.random.normal(loc=0.25, scale=0.15, size=2)
+    #     else:
+    #         return np.random.normal(loc=0.75, scale=0.15, size=2)
+    # elif model == "2d_sphere":
+    #     alpha = 2 * math.pi * np.random.random()
+    #     x = 1. * math.cos(alpha)
+    #     y = 1. * math.sin(alpha)
+    #     point = [x, y]
+    # elif model in ["2d_gaussian"]:
+    #     point = [np.random.normal(0.5, 0.15), np.random.normal(0.5, 0.15)]
+    #     while np.linalg.norm(point - np.array([0.5, 0.5])) > 0.5:
+    #         point = [np.random.normal(0.5, 0.15), np.random.normal(0.5, 0.15)]
+    # elif model in ["3d_cube", "3d_uniform"]:
+    #     point = [np.random.random(), np.random.random(), np.random.random()]
+    # elif model in ["5d_uniform"]:
+    #     dim = 5
+    #     point = [np.random.random() for _ in range(dim)]
+    # elif model in ["10d_uniform"]:
+    #     dim = 10
+    #     point = [np.random.random() for _ in range(dim)]
+    # elif model in {'3d_asymmetric'}:
+    #     if np.random.rand() < 0.3:
+    #         return np.random.normal(loc=0.25, scale=0.15, size=3)
+    #     else:
+    #         return np.random.normal(loc=0.75, scale=0.15, size=3)
+    # elif model in ['3d_gaussian']:
+    #     point = [np.random.normal(0.5, 0.15),
+    #              np.random.normal(0.5, 0.15),
+    #              np.random.normal(0.5, 0.15)]
+    #     while np.linalg.norm(point - np.array([0.5, 0.5, 0.5])) > 0.5:
+    #         point = [np.random.normal(0.5, 0.15),
+    #                  np.random.normal(0.5, 0.15),
+    #                  np.random.normal(0.5, 0.15)]
+    # elif model == "4d_cube":
+    #     dim = 4
+    #     point = [np.random.random() for _ in range(dim)]
+    # elif model == "5d_cube":
+    #     dim = 5
+    #     point = [np.random.random() for _ in range(dim)]
     else:
         print('unknown culture_id', model)
         point = [0, 0]
