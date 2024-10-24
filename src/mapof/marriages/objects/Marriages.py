@@ -1,8 +1,8 @@
 from mapof.core.objects.Instance import Instance
 
+import mapof.marriages.persistence.instance_exports as exports
 from mapof.marriages.cultures import *
 from mapof.marriages.features import get_feature
-import mapof.marriages.persistence.instance_exports as exports
 from mapof.marriages.persistence.instance_imports import import_real_instance
 
 

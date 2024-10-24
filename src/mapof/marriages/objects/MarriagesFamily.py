@@ -1,11 +1,11 @@
-#!/usr/bin/env python
-
-from mapof.core.objects.Family import Family
-from mapof.marriages.objects.Marriages import Marriages
 import copy
 
-import mapof.marriages.cultures.mallows as mallows
+from mapof.core.objects.Family import Family
 from mapof.core.utils import *
+
+import mapof.core.features.mallows as core_mallows
+from mapof.marriages.objects.Marriages import Marriages
+
 
 class MarriagesFamily(Family):
 
@@ -55,8 +55,10 @@ class MarriagesFamily(Family):
 
             variable = None
             if params is not None and 'norm-phi' in params:
-                params['phi'] = mallows.phi_from_relphi(self.num_agents,
-                                                        relphi=params['norm-phi'])
+                params['phi'] = core_mallows.phi_from_normphi(
+                    self.num_agents,
+                    normphi=params['norm-phi']
+            )
 
             instance_id = get_instance_id(self.single, self.family_id, j)
 
