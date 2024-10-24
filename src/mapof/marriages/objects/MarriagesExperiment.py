@@ -191,9 +191,12 @@ class MarriagesExperiment(Experiment, ABC):
 
         return instances
 
-    def compute_distances(self, distance_id: str = '1-mutual_attraction', num_processes: int = 1,
-                          self_distances: bool = False, vector_type: str = 'A',
-                          printing: bool = False) -> None:
+    def compute_distances(
+            self,
+            distance_id: str = 'l1-mutual_attraction',
+            num_processes: int = 1,
+            self_distances: bool = False
+    ) -> None:
         """ Compute distances between instances (using processes) """
 
         self.distance_id = distance_id
@@ -214,21 +217,23 @@ class MarriagesExperiment(Experiment, ABC):
         num_distances = len(ids)
 
         if self.experiment_id == 'virtual' or num_processes == 1:
-            metr.run_single_process(self, ids, distances, times, matchings, printing)
+            metr.run_single_process(self, ids, distances, times, matchings)
 
         else:
             processes = []
-            for t in range(num_processes):
-                print(f'Starting thread: {t}')
+            for process_id in range(num_processes):
+                print(f'Starting process: {process_id}')
                 sleep(0.1)
-                start = int(t * num_distances / num_processes)
-                stop = int((t + 1) * num_distances / num_processes)
+                start = int(process_id * num_distances / num_processes)
+                stop = int((process_id + 1) * num_distances / num_processes)
                 instances_ids = ids[start:stop]
 
-                process = Process(target=metr.run_multiple_processes, args=(self, instances_ids,
-                                                                            distances, times,
+                process = Process(target=metr.run_multiple_processes, args=(self,
+                                                                            instances_ids,
+                                                                            distances,
+                                                                            times,
                                                                             matchings,
-                                                                            printing, t))
+                                                                            process_id))
                 process.start()
                 processes.append(process)
 

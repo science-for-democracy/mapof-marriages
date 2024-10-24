@@ -44,10 +44,14 @@ def extract_distance_id(distance_id: str) -> (Callable, str):
     return inner_distance, main_distance
 
 
-def run_single_process(exp: Experiment, instances_ids: list,
-                      distances: dict, times: dict, matchings: dict,
-                      printing: bool) -> None:
-    """ Single thread for computing distances """
+def run_single_process(
+        exp: Experiment,
+        instances_ids: list,
+        distances: dict,
+        times: dict,
+        matchings: dict
+) -> None:
+    """ Single process for computing distances """
 
     for instance_id_1, instance_id_2 in instances_ids:
 
@@ -55,7 +59,6 @@ def run_single_process(exp: Experiment, instances_ids: list,
         distance = get_distance(copy.deepcopy(exp.instances[instance_id_1]),
                                 copy.deepcopy(exp.instances[instance_id_2]),
                                 distance_id=copy.deepcopy(exp.distance_id))
-        print(distance)
         if type(distance) is tuple:
             distance, matching = distance
             matching = np.array(matching)
@@ -75,7 +78,7 @@ def run_multiple_processes(
         matchings: dict,
         process_id: int
 ) -> None:
-    """ Single thread for computing distances """
+    """ Multiple processes for computing distances """
 
     for instance_id_1, instance_id_2 in instances_ids:
         start_time = time()

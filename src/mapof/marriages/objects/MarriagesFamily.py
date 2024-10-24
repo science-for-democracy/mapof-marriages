@@ -42,33 +42,6 @@ class MarriagesFamily(Family):
 
         self.num_agents = num_agents
 
-    def _get_params_for_paths(self, j, extremes=False):
-        path = self.path
-
-        variable = path['variable']
-
-        if 'extremes' in path:
-            extremes = path['extremes']
-
-        params = {}
-        if extremes:
-            params[variable] = j / (self.size - 1)
-        elif not extremes:
-            params[variable] = (j + 1) / (self.size + 1)
-
-        if 'scale' in path:
-            params[variable] *= path['scale']
-
-        if 'start' in path:
-            params[variable] += path['start']
-        else:
-            path['start'] = 0.
-
-        if 'step' in path:
-            params[variable] = path['start'] + j * path['step']
-
-        return params, variable
-
     def prepare_family(self,
                        experiment_id=None,
                        is_exported=True):
@@ -80,12 +53,7 @@ class MarriagesFamily(Family):
 
             params = copy.deepcopy(self.params)
 
-            path = self.path
             variable = None
-            if path is not None and 'variable' in path:
-                new_params, variable = self._get_params_for_paths(j)
-                params = {**params, **new_params}
-
             if params is not None and 'norm-phi' in params:
                 params['phi'] = mallows.phi_from_relphi(self.num_agents,
                                                         relphi=params['norm-phi'])
