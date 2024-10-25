@@ -1,14 +1,16 @@
 Mapof-marriages
 ===============
 
-Mapof-marriages package.
+Mapof-marriages Python package.
 
 
 .. toctree::
     :hidden:
 
-    Mapof <self>
-    objects/index
-    persistence/index
+    Mapof-Marriages <self>
+    installation
+    quickstart
+    reference/index
+    citation
 
 

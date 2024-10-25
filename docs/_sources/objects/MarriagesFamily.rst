@@ -1,6 +1,6 @@
 MarriagesFamily Object
 =============
 
-.. automodule:: mapof.core.objects.MarriagesFamily
+.. automodule:: mapof.marriages.objects.MarriagesFamily
     :members:
 

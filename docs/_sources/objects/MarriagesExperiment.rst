@@ -1,6 +1,6 @@
 MarriagesExperiment Object
 =================
 
-.. automodule:: mapof.core.objects.MarriagesExperiment
+.. automodule:: mapof.marriages.objects.MarriagesExperiment
     :members:
 

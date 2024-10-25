@@ -9,7 +9,7 @@ import numpy as np
 from mapof.core.distances import map_str_to_func
 from mapof.core.objects.Experiment import Experiment
 
-from mapof.marriages.distances import main_marriages_distances as mrd
+from mapof.marriages.distances import main_distances as mrd
 from mapof.marriages.objects.Marriages import Marriages
 
 
