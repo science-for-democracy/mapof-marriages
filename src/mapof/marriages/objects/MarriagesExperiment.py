@@ -38,8 +38,6 @@ class MarriagesExperiment(Experiment, ABC):
 
         self.matchings = {}
 
-        # election.import_matchings()
-
     def add_culture(self, name, function):
         pass
 
@@ -61,8 +59,8 @@ class MarriagesExperiment(Experiment, ABC):
                    marker: str = 'o',
                    family_id: str = None,
                    single_instance: bool = False,
-                   num_agents: int = None,
-                   path: dict = None):
+                   num_agents: int = None
+                   ):
 
         if instance_id is not None:
             family_id = instance_id
@@ -94,7 +92,6 @@ class MarriagesExperiment(Experiment, ABC):
             size=size,
             marker=marker,
             num_agents=num_agents,
-            path=path
         )
 
         self.num_families = len(self.families)
@@ -228,9 +225,6 @@ class MarriagesExperiment(Experiment, ABC):
             if 'num_agents' in row.keys():
                 num_agents = int(row['num_agents'])
 
-            if 'path' in row.keys():
-                path = ast.literal_eval(str(row['path']))
-
             if 'show' in row.keys():
                 show = row['show'].strip() == 'process_id'
 
@@ -242,7 +236,7 @@ class MarriagesExperiment(Experiment, ABC):
                                                   color=color, alpha=alpha, show=show,
                                                   size=size, marker=marker,
                                                   starting_from=starting_from,
-                                                  num_agents=num_agents, path=path,
+                                                  num_agents=num_agents,
                                                   single=single_instance)
             starting_from += size
 

@@ -6,7 +6,7 @@ from typing import Callable
 
 import mapof.core.persistence.experiment_exports as exports
 import numpy as np
-from mapof.core.inner_distances import map_str_to_func
+from mapof.core.distances import map_str_to_func
 from mapof.core.objects.Experiment import Experiment
 
 from mapof.marriages.distances import main_marriages_distances as mrd

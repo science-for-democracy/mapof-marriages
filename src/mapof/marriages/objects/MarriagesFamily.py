@@ -21,7 +21,6 @@ class MarriagesFamily(Family):
                  show=True,
                  marker='o',
                  starting_from: int = 0,
-                 path: dict = None,
                  single: bool = False,
 
                  num_agents: int = None):
@@ -37,7 +36,6 @@ class MarriagesFamily(Family):
                          show=show,
                          marker=marker,
                          starting_from=starting_from,
-                         path=path,
                          single=single)
 
         self.num_agents = num_agents
@@ -53,7 +51,6 @@ class MarriagesFamily(Family):
 
             params = copy.deepcopy(self.params)
 
-            variable = None
             if params is not None and 'norm-phi' in params:
                 params['phi'] = core_mallows.phi_from_normphi(
                     self.num_agents,
@@ -67,7 +64,6 @@ class MarriagesFamily(Family):
                                  culture_id=self.culture_id,
                                  num_agents=self.num_agents,
                                  label=self.label,
-                                 variable=variable,
                                  is_imported=False,
                                  **params)
 

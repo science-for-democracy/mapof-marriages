@@ -1,2 +1,2 @@
-mapof==0.1.0.dev3
+mapof==0.1.0.dev4
 tqdm==4.66.5

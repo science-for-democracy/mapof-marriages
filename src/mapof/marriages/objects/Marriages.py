@@ -12,22 +12,18 @@ class Marriages(Instance):
                  experiment_id,
                  instance_id,
                  alpha=1,
-                 label=None,
                  culture_id=None,
                  num_agents=None,
                  is_imported=True,
                  votes=None,
-                 variable=None):
+                 **kwargs):
 
         super().__init__(experiment_id, instance_id, alpha=alpha, culture_id=culture_id)
-
-        self.variable = variable
 
         self.num_agents = num_agents
         self.votes = votes
 
         self.retrospetive_vectors = None
-        self.positionwise_vectors = None
 
         if is_imported and experiment_id != 'virtual':
             try:
