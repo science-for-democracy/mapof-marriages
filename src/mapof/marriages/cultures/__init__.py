@@ -11,9 +11,9 @@ independent_models = {
     'ic': impartial.generate_ic_votes,
     'id': impartial.generate_id_votes,
     'symmetric': impartial.generate_symmetric_votes,
+    'group_ic': impartial.generate_group_ic_votes,
     'norm-mallows': mallows.generate_norm_mallows_votes,
     'urn': urn.generate_urn_votes,
-    'group_ic': impartial.generate_group_ic_votes,
 }
 
 dependent_models = {

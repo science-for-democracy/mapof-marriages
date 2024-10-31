@@ -353,7 +353,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapof.marriages.distances.main_distances.compute_retrospective_distance"><code class="docutils literal notranslate"><span class="pre">compute_retrospective_distance()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapof.marriages.distances.main_distances.get_matching_cost_retrospective"><code class="docutils literal notranslate"><span class="pre">get_matching_cost_retrospective()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -369,14 +368,23 @@ document.write(`
 <span id="main-distances"></span><h1>Main Distances<a class="headerlink" href="#module-mapof.marriages.distances.main_distances" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="mapof.marriages.distances.main_distances.compute_retrospective_distance">
-<span class="sig-name descname"><span class="pre">compute_retrospective_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inner_distance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mapof/marriages/distances/main_distances.html#compute_retrospective_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mapof.marriages.distances.main_distances.compute_retrospective_distance" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">compute_retrospective_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inner_distance)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'float'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list</span> <span class="pre">|</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mapof/marriages/distances/main_distances.html#compute_retrospective_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mapof.marriages.distances.main_distances.compute_retrospective_distance" title="Link to this definition">#</a></dt>
 <dd><p>Computes Retrospective distance between marriages instances</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="mapof.marriages.distances.main_distances.get_matching_cost_retrospective">
-<span class="sig-name descname"><span class="pre">get_matching_cost_retrospective</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../objects/Marriages.html#mapof.marriages.objects.Marriages.Marriages" title="mapof.marriages.objects.Marriages.Marriages"><span class="pre">Marriages</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../objects/Marriages.html#mapof.marriages.objects.Marriages.Marriages" title="mapof.marriages.objects.Marriages.Marriages"><span class="pre">Marriages</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">inner_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crossing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mapof/marriages/distances/main_distances.html#get_matching_cost_retrospective"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mapof.marriages.distances.main_distances.get_matching_cost_retrospective" title="Link to this definition">#</a></dt>
-<dd><p>Return: Cost table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>instance_1</strong> (<em>Marriage</em>) – First marriage instance.</p></li>
+<li><p><strong>instance_2</strong> (<em>Marriage</em>) – Second marriage instance.</p></li>
+<li><p><strong>inner_distance</strong> (<em>callable</em>) – Inner distance.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Retrospective distance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -427,7 +435,6 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapof.marriages.distances.main_distances.compute_retrospective_distance"><code class="docutils literal notranslate"><span class="pre">compute_retrospective_distance()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapof.marriages.distances.main_distances.get_matching_cost_retrospective"><code class="docutils literal notranslate"><span class="pre">get_matching_cost_retrospective()</span></code></a></li>
 </ul>
   </nav></div>
 

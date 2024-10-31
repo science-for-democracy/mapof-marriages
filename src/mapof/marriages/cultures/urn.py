@@ -16,7 +16,3 @@ def generate_urn_votes(num_agents: int = None,
         urn_size += alpha
 
     return votes
-
-# # # # # # # # # # # # # # # #
-# LAST CLEANUP ON: 14.10.2021 #
-# # # # # # # # # # # # # # # #

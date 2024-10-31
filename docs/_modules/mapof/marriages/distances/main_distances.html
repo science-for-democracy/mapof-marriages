@@ -306,19 +306,35 @@ document.write(`
                 <article class="bd-article">
                   
   <h1>Source code for mapof.marriages.distances.main_distances</h1><div class="highlight"><pre>
-<span></span>
-<span class="kn">from</span> <span class="nn">mapof.core.matchings</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">mapof.marriages.objects.Marriages</span> <span class="kn">import</span> <span class="n">Marriages</span>
+<span></span><span class="kn">from</span> <span class="nn">mapof.core.matchings</span> <span class="kn">import</span> <span class="o">*</span>
 
 
-<span class="c1"># MAIN DISTANCES</span>
 <div class="viewcode-block" id="compute_retrospective_distance">
 <a class="viewcode-back" href="../../../../reference/distances/main_distances.html#mapof.marriages.distances.main_distances.compute_retrospective_distance">[docs]</a>
-<span class="k">def</span> <span class="nf">compute_retrospective_distance</span><span class="p">(</span><span class="n">instance_1</span><span class="p">,</span> <span class="n">instance_2</span><span class="p">,</span> <span class="n">inner_distance</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes Retrospective distance between marriages instances &quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">compute_retrospective_distance</span><span class="p">(</span>
+        <span class="n">instance_1</span><span class="p">,</span>
+        <span class="n">instance_2</span><span class="p">,</span>
+        <span class="n">inner_distance</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">list</span> <span class="o">|</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes Retrospective distance between marriages instances</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">        instance_1 : Marriage</span>
+<span class="sd">            First marriage instance.</span>
+<span class="sd">        instance_2 : Marriage</span>
+<span class="sd">            Second marriage instance.</span>
+<span class="sd">        inner_distance : callable</span>
+<span class="sd">            Inner distance.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Retrospective distance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">crossing</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">]:</span>
-        <span class="n">cost_table_1</span><span class="p">,</span> <span class="n">cost_table_2</span> <span class="o">=</span> <span class="n">get_matching_cost_retrospective</span><span class="p">(</span>
+        <span class="n">cost_table_1</span><span class="p">,</span> <span class="n">cost_table_2</span> <span class="o">=</span> <span class="n">_get_matching_cost_retrospective</span><span class="p">(</span>
             <span class="n">instance_1</span><span class="p">,</span> <span class="n">instance_2</span><span class="p">,</span> <span class="n">inner_distance</span><span class="p">,</span> <span class="n">crossing</span><span class="o">=</span><span class="n">crossing</span><span class="p">)</span>
 
         <span class="n">a</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">solve_matching_vectors</span><span class="p">(</span><span class="n">cost_table_1</span><span class="p">)</span>
@@ -329,10 +345,12 @@ document.write(`
 
 
 
-<div class="viewcode-block" id="get_matching_cost_retrospective">
-<a class="viewcode-back" href="../../../../reference/distances/main_distances.html#mapof.marriages.distances.main_distances.get_matching_cost_retrospective">[docs]</a>
-<span class="k">def</span> <span class="nf">get_matching_cost_retrospective</span><span class="p">(</span><span class="n">instance_1</span><span class="p">:</span> <span class="n">Marriages</span><span class="p">,</span> <span class="n">instance_2</span><span class="p">:</span> <span class="n">Marriages</span><span class="p">,</span>
-                                    <span class="n">inner_distance</span><span class="p">:</span> <span class="nb">callable</span><span class="p">,</span> <span class="n">crossing</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_get_matching_cost_retrospective</span><span class="p">(</span>
+        <span class="n">instance_1</span><span class="p">,</span>
+        <span class="n">instance_2</span><span class="p">,</span>
+        <span class="n">inner_distance</span><span class="p">:</span> <span class="nb">callable</span><span class="p">,</span>
+        <span class="n">crossing</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Return: Cost table &quot;&quot;&quot;</span>
     <span class="n">vectors_1</span> <span class="o">=</span> <span class="n">instance_1</span><span class="o">.</span><span class="n">get_retrospective_vectors</span><span class="p">()</span>
     <span class="n">vectors_2</span> <span class="o">=</span> <span class="n">instance_2</span><span class="o">.</span><span class="n">get_retrospective_vectors</span><span class="p">()</span>
@@ -349,8 +367,7 @@ document.write(`
         <span class="k">return</span> <span class="p">[[</span><span class="n">inner_distance</span><span class="p">(</span><span class="n">vectors_1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">vectors_2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
                  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">)],</span> \
                <span class="p">[[</span><span class="n">inner_distance</span><span class="p">(</span><span class="n">vectors_1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">vectors_2</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
-                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">)]</span></div>
-
+                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">)]</span>
 </pre></div>
 
                 </article>
