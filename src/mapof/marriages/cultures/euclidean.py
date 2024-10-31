@@ -1,10 +1,9 @@
-import numpy as np
 import math
+
+import numpy as np
 from numpy import linalg
+
 from mapof.marriages.cultures.mallows import mallows_votes
-
-
-################################################################
 
 
 def weighted_l1(a1, a2, w):
@@ -14,10 +13,12 @@ def weighted_l1(a1, a2, w):
     return total
 
 
-def generate_euclidean_votes(num_agents: int = None,
-                             dim=2,
-                             space='uniform',
-                             **kwargs):
+def generate_euclidean_votes(
+        num_agents: int = None,
+        dim=2,
+        space='uniform',
+        **_kwargs
+):
     """
         Generates the votes based on the Euclidean model.
     """
@@ -81,12 +82,14 @@ def generate_mallows_euclidean_votes(num_agents: int = None,
     return [left_votes, right_votes]
 
 
-def generate_reverse_euclidean_votes(num_agents: int = None,
-                                     dim=2,
-                                     space='uniform',
-                                     phi=0.5,
-                                    proportion: float = 0.5,
-                                     **kwargs):
+def generate_reverse_euclidean_votes(
+        num_agents: int = None,
+        dim=2,
+        space='uniform',
+        phi=0.5,
+        proportion: float = 0.5,
+        **_kwargs
+):
     """
         Generates the votes based on the Reverse Euclidean model.
     """
@@ -177,7 +180,7 @@ def generate_fame_votes(num_agents: int = None,
                         radius=0.1,
                         **_kwargs):
     """
-        Generates the votes based on the Fame model.
+    Generates the votes based on the Fame model.
     """
 
     name = f'{dim}d_{space}'
@@ -212,7 +215,10 @@ def generate_fame_votes(num_agents: int = None,
 def generate_attributes_votes(num_agents: int = None,
                               dim: int = 2,
                               space: str = 'uniform',
-                              **kwargs):
+                              **_kwargs):
+    """
+    Generates the votes based on the Attributes model.
+    """
     name = f'{dim}d_{space}'
 
     left_agents_skills = np.array([get_rand(name) for _ in range(num_agents)])

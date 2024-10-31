@@ -9,7 +9,7 @@ List of Cultures
    :header-rows: 1
 
    * - culture_id
-     - Name Implementation
+     - Implementation
    * - ``ic``
      - :py:func:`~mapof.marriages.cultures.impartial.generate_ic_votes`
    * - ``id``

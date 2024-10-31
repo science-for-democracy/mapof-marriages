@@ -1,16 +1,5 @@
 import gurobipy as gp
 from gurobipy import GRB
-from random import shuffle
-import warnings
-
-
-def generate_instance(num_agents):
-    instance = []
-    for i in range(num_agents):
-        pref = [x for x in range(num_agents) if x != i]
-        shuffle(pref)
-        instance.append(pref)
-    return instance
 
 
 # Only works for even number of agents

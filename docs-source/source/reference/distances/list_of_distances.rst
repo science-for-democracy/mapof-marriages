@@ -9,6 +9,6 @@ List of Distances
    :header-rows: 1
 
    * - distance_id
-     - implementation
+     - Implementation
    * - ``mutual_attraction``
-     - :py:func:`~mapof.marriages.distances.mrd.compute_retrospective_distance`
+     - :py:func:`~mapof.marriages.distances.main_distances.compute_retrospective_distance`

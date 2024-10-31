@@ -3,14 +3,14 @@ import numpy as np
 
 def generate_ic_votes(num_agents: int = None, **_kwargs):
     """
-        Generates the votes based on the Impartial Culture model.
+    Generates the votes based on the Impartial Culture model.
     """
     return [list(np.random.permutation(num_agents)) for _ in range(num_agents)]
 
 
 def generate_id_votes(num_agents: int = None, **_kwargs):
     """
-        Generates the votes based on the Identity model.
+    Generates the votes based on the Identity model.
     """
 
     return [list(range(num_agents)) for _ in range(num_agents)]
@@ -18,7 +18,7 @@ def generate_id_votes(num_agents: int = None, **_kwargs):
 
 def generate_asymmetric_votes(num_agents: int = None, **_kwargs):
     """
-        Generates the votes based on the Asymmetric model.
+    Generates the votes based on the Asymmetric model.
     """
     votes = [list(range(num_agents)) for _ in range(num_agents)]
     votes_left = [_rotate(vote, shift+1) for shift, vote in enumerate(votes)]
@@ -29,7 +29,7 @@ def generate_asymmetric_votes(num_agents: int = None, **_kwargs):
 
 def generate_group_ic_votes(num_agents: int = None, proportion: int = 0.5, **_kwargs):
     """
-        Generates the votes based on the Group Impartial Culture model.
+    Generates the votes based on the Group Impartial Culture model.
     """
 
     size_1 = int(proportion * num_agents)
