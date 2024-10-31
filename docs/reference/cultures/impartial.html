@@ -43,6 +43,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/cultures/impartial';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Urn" href="urn.html" />
+    <link rel="prev" title="Main" href="main.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -146,10 +148,46 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">Mapof-Marriages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Code Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">Cultures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="list_of_cultures.html">List of Cultures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="main.html">Main</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Impartial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="urn.html">Urn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mallows.html">Mallows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="euclidean.html">Euclidean</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../distances/index.html">Distances</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../distances/list_of_distances.html">List of Distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../distances/main.html">Main</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../distances/main_distances.html">Main Distances</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../features/index.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../features/list_of_features.html">List of Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../features/main.html">Main</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../features/basic_features.html">Basic Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../features/stability_features.html">Stability Features</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../objects/index.html">Objects</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../objects/Marriages.html">Marriages Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../objects/MarriagesExperiment.html">MarriagesExperiment Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../objects/MarriagesFamily.html">MarriagesFamily Object</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../persistence/index.html">Persistence</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../persistence/instance_imports.html">Instance Imports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../persistence/instance_exports.html">Instance Exports</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../citation.html">Citation Policy</a></li>
 </ul>
 
@@ -314,7 +352,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapof.marriages.cultures.impartial.generate_asymmetric_votes"><code class="docutils literal notranslate"><span class="pre">generate_asymmetric_votes()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapof.marriages.cultures.impartial.generate_group_ic_votes"><code class="docutils literal notranslate"><span class="pre">generate_group_ic_votes()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapof.marriages.cultures.impartial.generate_ic_votes"><code class="docutils literal notranslate"><span class="pre">generate_ic_votes()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapof.marriages.cultures.impartial.generate_id_votes"><code class="docutils literal notranslate"><span class="pre">generate_id_votes()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapof.marriages.cultures.impartial.generate_symmetric_votes"><code class="docutils literal notranslate"><span class="pre">generate_symmetric_votes()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -329,9 +371,33 @@ document.write(`
   <section id="module-mapof.marriages.cultures.impartial">
 <span id="impartial"></span><h1>Impartial<a class="headerlink" href="#module-mapof.marriages.cultures.impartial" title="Link to this heading">#</a></h1>
 <dl class="py function">
+<dt class="sig sig-object py" id="mapof.marriages.cultures.impartial.generate_asymmetric_votes">
+<span class="sig-name descname"><span class="pre">generate_asymmetric_votes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_agents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mapof/marriages/cultures/impartial.html#generate_asymmetric_votes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mapof.marriages.cultures.impartial.generate_asymmetric_votes" title="Link to this definition">#</a></dt>
+<dd><p>Generates the votes based on the Asymmetric model.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mapof.marriages.cultures.impartial.generate_group_ic_votes">
-<span class="sig-name descname"><span class="pre">generate_group_ic_votes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_agents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proportion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mapof/marriages/cultures/impartial.html#generate_group_ic_votes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mapof.marriages.cultures.impartial.generate_group_ic_votes" title="Link to this definition">#</a></dt>
-<dd><p>Impartial Culture with two groups</p>
+<span class="sig-name descname"><span class="pre">generate_group_ic_votes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_agents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proportion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mapof/marriages/cultures/impartial.html#generate_group_ic_votes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mapof.marriages.cultures.impartial.generate_group_ic_votes" title="Link to this definition">#</a></dt>
+<dd><p>Generates the votes based on the Group Impartial Culture model.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mapof.marriages.cultures.impartial.generate_ic_votes">
+<span class="sig-name descname"><span class="pre">generate_ic_votes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_agents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mapof/marriages/cultures/impartial.html#generate_ic_votes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mapof.marriages.cultures.impartial.generate_ic_votes" title="Link to this definition">#</a></dt>
+<dd><p>Generates the votes based on the Impartial Culture model.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mapof.marriages.cultures.impartial.generate_id_votes">
+<span class="sig-name descname"><span class="pre">generate_id_votes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_agents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mapof/marriages/cultures/impartial.html#generate_id_votes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mapof.marriages.cultures.impartial.generate_id_votes" title="Link to this definition">#</a></dt>
+<dd><p>Generates the votes based on the Identity model.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mapof.marriages.cultures.impartial.generate_symmetric_votes">
+<span class="sig-name descname"><span class="pre">generate_symmetric_votes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_agents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mapof/marriages/cultures/impartial.html#generate_symmetric_votes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mapof.marriages.cultures.impartial.generate_symmetric_votes" title="Link to this definition">#</a></dt>
+<dd><p>Generates the votes based on the Symmetric model.</p>
 </dd></dl>
 
 </section>
@@ -347,6 +413,24 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="main.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Main</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="urn.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Urn</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -363,7 +447,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapof.marriages.cultures.impartial.generate_asymmetric_votes"><code class="docutils literal notranslate"><span class="pre">generate_asymmetric_votes()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapof.marriages.cultures.impartial.generate_group_ic_votes"><code class="docutils literal notranslate"><span class="pre">generate_group_ic_votes()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapof.marriages.cultures.impartial.generate_ic_votes"><code class="docutils literal notranslate"><span class="pre">generate_ic_votes()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapof.marriages.cultures.impartial.generate_id_votes"><code class="docutils literal notranslate"><span class="pre">generate_id_votes()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapof.marriages.cultures.impartial.generate_symmetric_votes"><code class="docutils literal notranslate"><span class="pre">generate_symmetric_votes()</span></code></a></li>
 </ul>
   </nav></div>
 

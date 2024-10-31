@@ -1,9 +1,14 @@
 import numpy as np
 
 
-def generate_urn_votes(num_agents: int = None,
-                       alpha: float = 0,
-                       **kwargs):
+def generate_urn_votes(
+        num_agents: int = None,
+        alpha: float = 0,
+        **_kwargs
+):
+    """
+        Generates the votes based on the Urn model.
+    """
 
     votes = np.zeros([num_agents, num_agents], dtype=int)
     urn_size = 1.

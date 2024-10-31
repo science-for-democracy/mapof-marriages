@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mapof.marriages.cultures.mallows &#8212; Map of Marriages</title>
+    <title>mapof.marriages.cultures.urn &#8212; Map of Marriages</title>
   
   
   
@@ -39,7 +39,7 @@
     <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/mapof/marriages/cultures/mallows';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/mapof/marriages/cultures/urn';</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -305,63 +305,33 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <h1>Source code for mapof.marriages.cultures.mallows</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">mapof.core.features.mallows</span> <span class="k">as</span> <span class="nn">ml</span>
-
-<span class="kn">from</span> <span class="nn">mapof.marriages.cultures.impartial</span> <span class="kn">import</span> <span class="n">generate_asymmetric_votes</span>
+  <h1>Source code for mapof.marriages.cultures.urn</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<span class="k">def</span> <span class="nf">generate_mallows_votes</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">ml</span><span class="o">.</span><span class="n">generate_mallows_votes</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-
-<div class="viewcode-block" id="generate_norm_mallows_votes">
-<a class="viewcode-back" href="../../../../reference/cultures/mallows.html#mapof.marriages.cultures.mallows.generate_norm_mallows_votes">[docs]</a>
-<span class="k">def</span> <span class="nf">generate_norm_mallows_votes</span><span class="p">(</span><span class="n">num_agents</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                <span class="n">normphi</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-                                <span class="n">weight</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
-                                <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="generate_urn_votes">
+<a class="viewcode-back" href="../../../../reference/cultures/urn.html#mapof.marriages.cultures.urn.generate_urn_votes">[docs]</a>
+<span class="k">def</span> <span class="nf">generate_urn_votes</span><span class="p">(</span>
+        <span class="n">num_agents</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_kwargs</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generates the votes based on the Norm-Mallows model.</span>
+<span class="sd">        Generates the votes based on the Urn model.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">phi</span> <span class="o">=</span> <span class="n">ml</span><span class="o">.</span><span class="n">phi_from_normphi</span><span class="p">(</span><span class="n">num_agents</span><span class="p">,</span> <span class="n">normphi</span><span class="o">=</span><span class="n">normphi</span><span class="p">)</span>
+    <span class="n">votes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">num_agents</span><span class="p">,</span> <span class="n">num_agents</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">urn_size</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_agents</span><span class="p">):</span>
+        <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">urn_size</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rho</span> <span class="o">&lt;=</span> <span class="mf">1.</span><span class="p">:</span>
+            <span class="n">votes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">num_agents</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">votes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">votes</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">)]</span>
+        <span class="n">urn_size</span> <span class="o">+=</span> <span class="n">alpha</span>
 
-    <span class="k">return</span> <span class="n">generate_mallows_votes</span><span class="p">(</span><span class="n">num_agents</span><span class="p">,</span> <span class="n">num_agents</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">votes</span></div>
 
-
-
-<div class="viewcode-block" id="generate_mallows_asymmetric_votes">
-<a class="viewcode-back" href="../../../../reference/cultures/mallows.html#mapof.marriages.cultures.mallows.generate_mallows_asymmetric_votes">[docs]</a>
-<span class="k">def</span> <span class="nf">generate_mallows_asymmetric_votes</span><span class="p">(</span><span class="n">num_agents</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                                      <span class="n">phi</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
-                                      <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generates the votes based on the Mallows model on top of Asymmetric instance.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">votes_left</span><span class="p">,</span> <span class="n">votes_right</span> <span class="o">=</span> <span class="n">generate_asymmetric_votes</span><span class="p">(</span><span class="n">num_agents</span><span class="o">=</span><span class="n">num_agents</span><span class="p">)</span>
-
-    <span class="n">votes_left</span> <span class="o">=</span> <span class="n">mallows_votes</span><span class="p">(</span><span class="n">votes_left</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
-    <span class="n">votes_right</span> <span class="o">=</span> <span class="n">mallows_votes</span><span class="p">(</span><span class="n">votes_right</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="p">[</span><span class="n">votes_left</span><span class="p">,</span> <span class="n">votes_right</span><span class="p">]</span></div>
-
-
-
-<span class="k">def</span> <span class="nf">mallows_vote</span><span class="p">(</span><span class="n">vote</span><span class="p">,</span> <span class="n">phi</span><span class="p">):</span>
-    <span class="n">num_candidates</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vote</span><span class="p">)</span>
-    <span class="n">raw_vote</span> <span class="o">=</span> <span class="n">generate_mallows_votes</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_candidates</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="n">phi</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">new_vote</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">vote</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_candidates</span><span class="p">):</span>
-        <span class="n">new_vote</span><span class="p">[</span><span class="n">raw_vote</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">vote</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">new_vote</span>
-
-
-<span class="k">def</span> <span class="nf">mallows_votes</span><span class="p">(</span><span class="n">votes</span><span class="p">,</span> <span class="n">phi</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">votes</span><span class="p">)):</span>
-        <span class="n">votes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">mallows_vote</span><span class="p">(</span><span class="n">votes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">phi</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">votes</span>
 </pre></div>
 
                 </article>

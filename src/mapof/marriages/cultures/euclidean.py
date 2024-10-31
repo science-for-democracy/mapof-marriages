@@ -18,6 +18,9 @@ def generate_euclidean_votes(num_agents: int = None,
                              dim=2,
                              space='uniform',
                              **kwargs):
+    """
+        Generates the votes based on the Euclidean model.
+    """
     name = f'{dim}d_{space}'
 
     left = np.array([get_rand(name, i=i, num_agents=num_agents) for i in range(num_agents)])
@@ -47,6 +50,10 @@ def generate_mallows_euclidean_votes(num_agents: int = None,
                                      space='uniform',
                                      phi=0.5,
                                      **kwargs):
+    """
+        Generates the votes based on the Mallows on top of the Euclidean model.
+    """
+
     name = f'{dim}d_{space}'
 
     left = np.array([get_rand(name, i=i, num_agents=num_agents) for i in range(num_agents)])
@@ -80,6 +87,9 @@ def generate_reverse_euclidean_votes(num_agents: int = None,
                                      phi=0.5,
                                     proportion: float = 0.5,
                                      **kwargs):
+    """
+        Generates the votes based on the Reverse Euclidean model.
+    """
     name = f'{dim}d_{space}'
 
     left = np.array([get_rand(name, i=i, num_agents=num_agents) for i in range(num_agents)])
@@ -119,7 +129,10 @@ def generate_expectation_votes(num_agents: int = None,
                                space='uniform',
                                std=0.1,
                                phi=0.5,
-                               **kwargs):
+                               **_kwargs):
+    """
+        Generates the votes based on the Expectation model.
+    """
     name = f'{dim}d_{space}'
 
     left_agents_reality = np.array([get_rand(name) for _ in range(num_agents)])
@@ -162,7 +175,10 @@ def generate_fame_votes(num_agents: int = None,
                         dim=2,
                         space='uniform',
                         radius=0.1,
-                        **kwargs):
+                        **_kwargs):
+    """
+        Generates the votes based on the Fame model.
+    """
 
     name = f'{dim}d_{space}'
 

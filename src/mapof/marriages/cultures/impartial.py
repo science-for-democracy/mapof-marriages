@@ -1,26 +1,36 @@
 import numpy as np
 
 
-def generate_ic_votes(num_agents: int = None, **kwargs):
-
+def generate_ic_votes(num_agents: int = None, **_kwargs):
+    """
+        Generates the votes based on the Impartial Culture model.
+    """
     return [list(np.random.permutation(num_agents)) for _ in range(num_agents)]
 
 
-def generate_id_votes(num_agents: int = None, **kwargs):
+def generate_id_votes(num_agents: int = None, **_kwargs):
+    """
+        Generates the votes based on the Identity model.
+    """
 
     return [list(range(num_agents)) for _ in range(num_agents)]
 
 
-def generate_asymmetric_votes(num_agents: int = None, **kwargs):
+def generate_asymmetric_votes(num_agents: int = None, **_kwargs):
+    """
+        Generates the votes based on the Asymmetric model.
+    """
     votes = [list(range(num_agents)) for _ in range(num_agents)]
-    votes_left = [rotate(vote, shift+1) for shift, vote in enumerate(votes)]
+    votes_left = [_rotate(vote, shift+1) for shift, vote in enumerate(votes)]
     votes = [list(range(num_agents)) for _ in range(num_agents)]
-    votes_right = [rotate(vote, shift) for shift, vote in enumerate(votes)]
+    votes_right = [_rotate(vote, shift) for shift, vote in enumerate(votes)]
     return [votes_left, votes_right]
 
 
-def generate_group_ic_votes(num_agents: int = None, proportion: int = 0.5, **kwargs):
-    """ Impartial Culture with two groups """
+def generate_group_ic_votes(num_agents: int = None, proportion: int = 0.5, **_kwargs):
+    """
+        Generates the votes based on the Group Impartial Culture model.
+    """
 
     size_1 = int(proportion * num_agents)
     size_2 = int(num_agents - size_1)
@@ -38,7 +48,10 @@ def generate_group_ic_votes(num_agents: int = None, proportion: int = 0.5, **kwa
     return votes
 
 
-def generate_symmetric_votes(num_agents: int = None, **kwargs):
+def generate_symmetric_votes(num_agents: int = None, **_kwargs):
+    """
+        Generates the votes based on the Symmetric model.
+    """
 
     num_rounds = num_agents - 1
 
@@ -74,12 +87,7 @@ def generate_symmetric_votes(num_agents: int = None, **kwargs):
 
     return votes
 
-# HELPER
-def rotate(vector, shift):
+
+def _rotate(vector, shift):
     shift = shift % len(vector)
     return vector[shift:] + vector[:shift]
-
-
-# # # # # # # # # # # # # # # #
-# LAST CLEANUP ON: 14.10.2021 #
-# # # # # # # # # # # # # # # #

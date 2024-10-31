@@ -11,6 +11,9 @@ def generate_norm_mallows_votes(num_agents=None,
                                 normphi=0.5,
                                 weight=0.,
                                 **kwargs):
+    """
+        Generates the votes based on the Norm-Mallows model.
+    """
 
     phi = ml.phi_from_normphi(num_agents, normphi=normphi)
 
@@ -20,7 +23,9 @@ def generate_norm_mallows_votes(num_agents=None,
 def generate_mallows_asymmetric_votes(num_agents: int = None,
                                       phi: float = 0.5,
                                       **kwargs):
-    """ Mallows on top of Asymmetric instance """
+    """
+        Generates the votes based on the Mallows model on top of Asymmetric instance.
+    """
 
     votes_left, votes_right = generate_asymmetric_votes(num_agents=num_agents)
 
