@@ -18,6 +18,12 @@ in the console.
 For more complicated variants of installation, refer to the [readme of
 Mapof](https://github.com/science-for-democracy/mapof).
 
+
+# Documentation
+
+The complete documentation is available [here](https://science-for-democracy.github.io/mapof-marriages/).
+
+
 # Acknowledgments
 
 This project is part of the [PRAGMA project](https://home.agh.edu.pl/~pragma/)
