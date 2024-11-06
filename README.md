@@ -1,3 +1,4 @@
+[![PyPI Status](https://img.shields.io/pypi/v/mapof-marriages.svg)](https://pypi.python.org/pypi/mapof-marriages)
 [![Tests](https://github.com/science-for-democracy/mapof-marriages/actions/workflows/python-tests.yml/badge.svg)](https://github.com/science-for-democracy/mapof-marriages/actions/workflows/python-tests.yml)
 [![codecov](https://codecov.io/gh/science-for-democracy/mapof-marriages/graph/badge.svg?token=MB6YOJMFIS)](https://codecov.io/gh/science-for-democracy/mapof-marriages)
 
