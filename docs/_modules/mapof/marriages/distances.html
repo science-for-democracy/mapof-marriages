@@ -162,9 +162,7 @@
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../reference/distances/index.html">Distances</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../reference/distances/list_of_distances.html">List of Distances</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../reference/distances/main.html">Main</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../reference/distances/main_distances.html">Main Distances</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../reference/features/index.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -307,8 +305,6 @@ document.write(`
                   
   <h1>Source code for mapof.marriages.distances</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">csv</span>
-<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
 
@@ -317,7 +313,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">mapof.core.distances</span> <span class="kn">import</span> <span class="n">map_str_to_func</span>
 <span class="kn">from</span> <span class="nn">mapof.core.objects.Experiment</span> <span class="kn">import</span> <span class="n">Experiment</span>
 
-<span class="kn">from</span> <span class="nn">mapof.marriages.distances</span> <span class="kn">import</span> <span class="n">main_distances</span> <span class="k">as</span> <span class="n">mrd</span>
+<span class="kn">from</span> <span class="nn">mapof.marriages.distances</span> <span class="kn">import</span> <span class="n">fast_distances</span> <span class="k">as</span> <span class="n">mrd</span>
 <span class="kn">from</span> <span class="nn">mapof.marriages.objects.Marriages</span> <span class="kn">import</span> <span class="n">Marriages</span>
 
 

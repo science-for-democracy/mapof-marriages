@@ -17,3 +17,7 @@ To import mapof-marriages python package:
 General Tasks
 -------------
 To be updated.
+
+Since, this package is a twin sister of `mapof-roommate` package, for now, please refer to the
+`Stable Roommates tutorial <https://science-for-democracy.github.io/mapof-roommates/quickstart.html>`_
+for more information.

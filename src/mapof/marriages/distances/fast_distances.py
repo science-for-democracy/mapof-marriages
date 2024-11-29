@@ -1,12 +1,15 @@
 from mapof.core.matchings import *
 
+from mapof.marriages.distances.register import register_marriages_distance
 
-def compute_retrospective_distance(
+
+@register_marriages_distance('mutual_attraction')
+def compute_mutual_attraction_distance(
         instance_1,
         instance_2,
         inner_distance
 ) -> (float, list | None):
-    """ Computes Retrospective distance between marriages instances
+    """ Computes mutual attraction distance between marriages instances
 
     Parameters
     ----------
@@ -20,7 +23,7 @@ def compute_retrospective_distance(
     Returns
     -------
         float
-            Retrospective distance.
+            Mutual attraction distance.
     """
     results = []
     for crossing in [False, True]:

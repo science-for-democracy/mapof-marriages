@@ -11,4 +11,4 @@ List of Distances
    * - distance_id
      - Implementation
    * - ``mutual_attraction``
-     - :py:func:`~mapof.marriages.distances.main_distances.compute_retrospective_distance`
+     - :py:func:`~mapof.marriages.distances.fast_distances.compute_retrospective_distance`

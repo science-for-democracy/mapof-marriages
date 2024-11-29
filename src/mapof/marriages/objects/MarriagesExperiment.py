@@ -273,9 +273,9 @@ class MarriagesExperiment(Experiment, ABC):
 
             with open(path, 'w') as file_csv:
                 file_csv.write(
-                    "size;num_agents;culture_id;params;color;alpha;"
-                    "family_id;label;marker\n")
-                file_csv.write("3;10;ic;{};black;1;ic;Impartial Culture;o\n")
+                    "size;num_agents;culture_id;params;family_id;"
+                    "label;color;alpha;marker;ms;path;show\n"
+                )
 
     def prepare_instances(self):
 
