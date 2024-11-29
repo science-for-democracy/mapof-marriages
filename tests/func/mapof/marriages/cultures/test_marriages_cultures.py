@@ -4,12 +4,12 @@ import pytest
 import mapof.marriages as mapel
 
 registered_marriages_cultures_to_test = {
-    'ic',
-    'id',
+    'impartial',
+    'identity',
     'symmetric',
     'norm-mallows',
     'urn',
-    'group_ic',
+    'group_impartial',
     'malasym',
     'asymmetric',
     'euclidean',

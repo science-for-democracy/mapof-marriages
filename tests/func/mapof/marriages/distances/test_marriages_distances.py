@@ -14,10 +14,10 @@ class TestMarriagesDistances:
     def test_marriages_distances(self, distance_id):
         num_agents = int(np.random.randint(5, 50) * 2)
 
-        instance_1 = mapel.generate_marriages_instance(culture_id='ic',
+        instance_1 = mapel.generate_marriages_instance(culture_id='impartial',
                                                        num_agents=num_agents)
 
-        instance_2 = mapel.generate_marriages_instance(culture_id='ic',
+        instance_2 = mapel.generate_marriages_instance(culture_id='impartial',
                                                        num_agents=num_agents)
 
         distance, mapping = mapel.compute_distance(instance_1, instance_2,

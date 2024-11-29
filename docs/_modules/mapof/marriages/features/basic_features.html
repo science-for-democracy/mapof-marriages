@@ -299,7 +299,7 @@ document.write(`
 
 <div class="viewcode-block" id="rank_matching">
 <a class="viewcode-back" href="../../../../features/basic_features.html#mapof.marriages.features.basic_features.rank_matching">[docs]</a>
-<span class="k">def</span> <span class="nf">rank_matching</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">best</span><span class="p">,</span> <span class="n">summed</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_rank_matching</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">best</span><span class="p">,</span> <span class="n">summed</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; # Only call for instances that admit a stable matchig</span>
 <span class="sd"># summed: Set to true we try to optimize the summed rank of agents for their partner in the matching, set to false we optimize the minimum rank</span>
 <span class="sd"># Best (only relevant if summed is set to true): Set to true we output the best possible matching, set to false the worst one</span>
@@ -355,7 +355,7 @@ document.write(`
 
 <span class="k">def</span> <span class="nf">summed_rank_maximal_matching</span><span class="p">(</span><span class="n">instance</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">val</span><span class="p">,</span> <span class="n">matching</span> <span class="o">=</span> <span class="n">rank_matching</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">val</span><span class="p">,</span> <span class="n">matching</span> <span class="o">=</span> <span class="n">_rank_matching</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">val</span>
@@ -363,7 +363,7 @@ document.write(`
 
 <span class="k">def</span> <span class="nf">summed_rank_minimal_matching</span><span class="p">(</span><span class="n">instance</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">val</span><span class="p">,</span> <span class="n">matching</span> <span class="o">=</span> <span class="n">rank_matching</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">val</span><span class="p">,</span> <span class="n">matching</span> <span class="o">=</span> <span class="n">_rank_matching</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
 
@@ -372,7 +372,7 @@ document.write(`
 
 <span class="k">def</span> <span class="nf">minimal_rank_maximizing_matching</span><span class="p">(</span><span class="n">instance</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">val</span><span class="p">,</span> <span class="n">matching</span> <span class="o">=</span> <span class="n">rank_matching</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">val</span><span class="p">,</span> <span class="n">matching</span> <span class="o">=</span> <span class="n">_rank_matching</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">val</span>

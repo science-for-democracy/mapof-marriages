@@ -1,16 +1,18 @@
-import gurobipy as gp
-from gurobipy import GRB
-from random import shuffle
 import statistics
-import warnings
 import sys
+from random import shuffle
+
+import gurobipy as gp
 import networkx as nx
+from gurobipy import GRB
+
+from mapof.marriages.features.register import register_marriages_distance
 
 sys.setrecursionlimit(10000)
 # warnings.filterwarnings("error")
 
 
-def number_blockingPairs(instance, matching) -> int:
+def number_blocking_pairs(instance, matching) -> int:
     bps = 0
     num_agents = len(instance[0])
     for i in range(num_agents):
@@ -25,7 +27,7 @@ def number_blockingPairs(instance, matching) -> int:
     return bps
 
 
-def rank_matching(instance, best, summed):
+def _rank_matching(instance, best, summed):
     """ # Only call for instances that admit a stable matchig
 # summed: Set to true we try to optimize the summed rank of agents for their partner in the matching, set to false we optimize the minimum rank
 # Best (only relevant if summed is set to true): Set to true we output the best possible matching, set to false the worst one
@@ -77,33 +79,34 @@ def rank_matching(instance, best, summed):
                 matching2[j] = i
     return int(m.objVal), [matching1, matching2]
 
-
+@register_marriages_distance('summed_rank_maximal_matching')
 def summed_rank_maximal_matching(instance):
     try:
-        val, matching = rank_matching(instance, True, True)
+        val, matching = _rank_matching(instance, True, True)
     except:
         return None
     return val
 
-
+@register_marriages_distance('summed_rank_minimal_matching')
 def summed_rank_minimal_matching(instance):
     try:
-        val, matching = rank_matching(instance, False, True)
+        val, matching = _rank_matching(instance, False, True)
     except:
         return None
 
     return val
 
-
+@register_marriages_distance('minimal_rank_maximizing_matching')
 def minimal_rank_maximizing_matching(instance):
     try:
-        val, matching = rank_matching(instance, True, False)
-    except:
+        val, matching = _rank_matching(instance, True, False)
+    except Exception:
         return None
     return val
 
 
-def avg_number_of_bps_for_random_matching(instance, iterations=100):
+@register_marriages_distance('avg_num_of_bps_for_rand_matching')
+def avg_number_of_bps_for_rand_matching(instance, iterations=100):
     instance = instance.votes
     bps = []
     num_agents = len(instance[0])
@@ -113,11 +116,12 @@ def avg_number_of_bps_for_random_matching(instance, iterations=100):
         m2 = []
         for i in range(num_agents):
             m2.append(agents.index(i))
-        bps.append(number_blockingPairs(instance, [agents, m2]))
+        bps.append(number_blocking_pairs(instance, [agents, m2]))
     return statistics.mean(bps), statistics.stdev(bps)
 
 
-def number_of_bps_maximumWeight(instance):
+@register_marriages_distance('num_of_bps_min_weight')
+def number_of_bps_maximum_weight(instance):
     instance = instance.votes
     num_agents = len(instance[0])
     G = nx.Graph()
@@ -134,4 +138,4 @@ def number_of_bps_maximumWeight(instance):
         big = max(p[0], p[1])
         matching_dict_m[small] = big - num_agents
         matching_dict_w[big - num_agents] = small
-    return number_blockingPairs(instance, [matching_dict_m, matching_dict_w])
+    return number_blocking_pairs(instance, [matching_dict_m, matching_dict_w])

@@ -10,7 +10,7 @@ class TestOnlineMarriageExperiment:
 
     def add_instance(self):
         self.experiment.add_instance(
-            culture_id='ic',
+            culture_id='impartial',
             num_agents=10
         )
         self.experiment.add_instance(
@@ -22,7 +22,7 @@ class TestOnlineMarriageExperiment:
     def add_families(self):
         """Helper method to add default families to the experiment."""
         self.experiment.add_family(
-            culture_id='ic',
+            culture_id='impartial',
             num_agents=10,
             size=10,
             color='green',

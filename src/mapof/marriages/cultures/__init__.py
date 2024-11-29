@@ -8,10 +8,10 @@ import mapof.marriages.cultures.mallows as mallows
 import mapof.marriages.cultures.urn as urn
 
 independent_models = {
-    'ic': impartial.generate_ic_votes,
-    'id': impartial.generate_id_votes,
+    'impartial': impartial.generate_ic_votes,
+    'identity': impartial.generate_id_votes,
     'symmetric': impartial.generate_symmetric_votes,
-    'group_ic': impartial.generate_group_ic_votes,
+    'group_impartial': impartial.generate_group_ic_votes,
     'norm-mallows': mallows.generate_norm_mallows_votes,
     'urn': urn.generate_urn_votes,
 }

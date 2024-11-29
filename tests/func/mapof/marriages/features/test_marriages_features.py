@@ -1,8 +1,7 @@
-import pytest
 import numpy as np
+import pytest
 
 import mapof.marriages as mapel
-
 
 registered_marriages_features_to_test = {
     'summed_rank_minimal_matching',
@@ -19,7 +18,9 @@ class TestFeatures:
 
         num_agents = int(np.random.randint(5, 50) * 2)
 
-        instance = mapel.generate_marriages_instance(culture_id='ic',
+        instance = mapel.generate_marriages_instance(culture_id='impartial',
                                                      num_agents=num_agents)
 
         instance.compute_feature(feature_id)
+
+        # assert instance.features[feature_id] is not None
