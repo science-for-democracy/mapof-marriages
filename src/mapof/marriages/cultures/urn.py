@@ -1,6 +1,9 @@
 import numpy as np
 
+from mapof.marriages.cultures.register import register_marriages_independent_culture
 
+
+@register_marriages_independent_culture('urn')
 def generate_urn_votes(
         num_agents: int = None,
         alpha: float = 0,

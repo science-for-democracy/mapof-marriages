@@ -6,7 +6,7 @@ import gurobipy as gp
 import networkx as nx
 from gurobipy import GRB
 
-from mapof.marriages.features.register import register_marriages_distance
+from mapof.marriages.features.register import register_marriages_feature
 
 sys.setrecursionlimit(10000)
 # warnings.filterwarnings("error")
@@ -79,7 +79,7 @@ def _rank_matching(instance, best, summed):
                 matching2[j] = i
     return int(m.objVal), [matching1, matching2]
 
-@register_marriages_distance('summed_rank_maximal_matching')
+@register_marriages_feature('summed_rank_maximal_matching')
 def summed_rank_maximal_matching(instance):
     try:
         val, matching = _rank_matching(instance, True, True)
@@ -87,7 +87,7 @@ def summed_rank_maximal_matching(instance):
         return None
     return val
 
-@register_marriages_distance('summed_rank_minimal_matching')
+@register_marriages_feature('summed_rank_minimal_matching')
 def summed_rank_minimal_matching(instance):
     try:
         val, matching = _rank_matching(instance, False, True)
@@ -96,7 +96,7 @@ def summed_rank_minimal_matching(instance):
 
     return val
 
-@register_marriages_distance('minimal_rank_maximizing_matching')
+@register_marriages_feature('minimal_rank_maximizing_matching')
 def minimal_rank_maximizing_matching(instance):
     try:
         val, matching = _rank_matching(instance, True, False)
@@ -105,7 +105,7 @@ def minimal_rank_maximizing_matching(instance):
     return val
 
 
-@register_marriages_distance('avg_num_of_bps_for_rand_matching')
+@register_marriages_feature('avg_num_of_bps_for_rand_matching')
 def avg_number_of_bps_for_rand_matching(instance, iterations=100):
     instance = instance.votes
     bps = []
@@ -120,7 +120,7 @@ def avg_number_of_bps_for_rand_matching(instance, iterations=100):
     return statistics.mean(bps), statistics.stdev(bps)
 
 
-@register_marriages_distance('num_of_bps_min_weight')
+@register_marriages_feature('num_of_bps_min_weight')
 def number_of_bps_maximum_weight(instance):
     instance = instance.votes
     num_agents = len(instance[0])

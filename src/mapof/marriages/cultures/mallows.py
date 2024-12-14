@@ -2,11 +2,17 @@ import mapof.core.features.mallows as ml
 
 from mapof.marriages.cultures.impartial import generate_asymmetric_votes
 
+from mapof.marriages.cultures.register import (
+    register_marriages_independent_culture,
+    register_marriages_dependent_culture,
+)
 
+
+@register_marriages_independent_culture('mallows')
 def generate_mallows_votes(*args, **kwargs):
     return ml.generate_mallows_votes(*args, **kwargs)
 
-
+@register_marriages_independent_culture('norm_mallows')
 def generate_norm_mallows_votes(num_agents=None,
                                 normphi=0.5,
                                 weight=0.,
@@ -20,6 +26,7 @@ def generate_norm_mallows_votes(num_agents=None,
     return generate_mallows_votes(num_agents, num_agents, phi)
 
 
+@register_marriages_dependent_culture('malasym')
 def generate_mallows_asymmetric_votes(num_agents: int = None,
                                       phi: float = 0.5,
                                       **kwargs):
@@ -29,13 +36,13 @@ def generate_mallows_asymmetric_votes(num_agents: int = None,
 
     votes_left, votes_right = generate_asymmetric_votes(num_agents=num_agents)
 
-    votes_left = mallows_votes(votes_left, phi)
-    votes_right = mallows_votes(votes_right, phi)
+    votes_left = _mallows_votes(votes_left, phi)
+    votes_right = _mallows_votes(votes_right, phi)
 
     return [votes_left, votes_right]
 
 
-def mallows_vote(vote, phi):
+def _mallows_vote(vote, phi):
     num_candidates = len(vote)
     raw_vote = generate_mallows_votes(1, num_candidates, phi=phi, weight=0)[0]
     new_vote = [0] * len(vote)
@@ -44,7 +51,7 @@ def mallows_vote(vote, phi):
     return new_vote
 
 
-def mallows_votes(votes, phi):
+def _mallows_votes(votes, phi):
     for i in range(len(votes)):
-        votes[i] = mallows_vote(votes[i], phi)
+        votes[i] = _mallows_vote(votes[i], phi)
     return votes

@@ -7,25 +7,11 @@ import mapof.marriages.cultures.impartial as impartial
 import mapof.marriages.cultures.mallows as mallows
 import mapof.marriages.cultures.urn as urn
 
-independent_models = {
-    'impartial': impartial.generate_ic_votes,
-    'identity': impartial.generate_id_votes,
-    'symmetric': impartial.generate_symmetric_votes,
-    'group_impartial': impartial.generate_group_ic_votes,
-    'norm-mallows': mallows.generate_norm_mallows_votes,
-    'urn': urn.generate_urn_votes,
-}
 
-dependent_models = {
-    'malasym': mallows.generate_mallows_asymmetric_votes,
-    'asymmetric': impartial.generate_asymmetric_votes,
-    'euclidean': euclidean.generate_euclidean_votes,
-    'reverse_euclidean': euclidean.generate_reverse_euclidean_votes,
-    'mallows_euclidean': euclidean.generate_mallows_euclidean_votes,
-    'expectation': euclidean.generate_expectation_votes,
-    'attributes': euclidean.generate_attributes_votes,
-    'fame': euclidean.generate_fame_votes,
-}
+from mapof.marriages.cultures.register import (
+    registered_marriages_independent_cultures,
+    registered_marriages_dependent_cultures,
+)
 
 
 def generate_votes(
@@ -34,13 +20,16 @@ def generate_votes(
         params: dict = None
 ) -> list | np.ndarray:
 
-    if culture_id in independent_models:
-        votes_1 = independent_models.get(culture_id)(num_agents=num_agents, **params)
-        votes_2 = independent_models.get(culture_id)(num_agents=num_agents, **params)
+    if culture_id in registered_marriages_independent_cultures:
+        votes_1 = registered_marriages_independent_cultures.get(culture_id)(
+            num_agents=num_agents, **params)
+        votes_2 = registered_marriages_independent_cultures.get(culture_id)(
+            num_agents=num_agents, **params)
         return [votes_1, votes_2]
 
-    elif culture_id in dependent_models:
-        return dependent_models.get(culture_id)(num_agents=num_agents, **params)
+    elif culture_id in registered_marriages_dependent_cultures:
+        return registered_marriages_dependent_cultures.get(culture_id)(
+            num_agents=num_agents, **params)
 
     else:
         logging.warning(f'No such culture id: {culture_id}')

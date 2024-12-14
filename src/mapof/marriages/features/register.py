@@ -1,11 +1,11 @@
-# Some distances are added via decorators
-registered_marriages_distances = {
+# Some features are added via decorators
+registered_marriages_features = {
 }
 
-def register_marriages_distance(feature_id: str):
+def register_marriages_feature(feature_id: str):
 
     def decorator(func):
-        registered_marriages_distances[feature_id] = func
+        registered_marriages_features[feature_id] = func
         return func
 
     return decorator

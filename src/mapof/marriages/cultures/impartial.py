@@ -1,6 +1,12 @@
 import numpy as np
 
+from mapof.marriages.cultures.register import (
+    register_marriages_independent_culture,
+    register_marriages_dependent_culture,
+)
 
+
+@register_marriages_independent_culture('impartial')
 def generate_ic_votes(num_agents: int = None, **_kwargs):
     """
     Generates the votes based on the Impartial Culture model.
@@ -8,6 +14,7 @@ def generate_ic_votes(num_agents: int = None, **_kwargs):
     return [list(np.random.permutation(num_agents)) for _ in range(num_agents)]
 
 
+@register_marriages_independent_culture('identity')
 def generate_id_votes(num_agents: int = None, **_kwargs):
     """
     Generates the votes based on the Identity model.
@@ -16,17 +23,7 @@ def generate_id_votes(num_agents: int = None, **_kwargs):
     return [list(range(num_agents)) for _ in range(num_agents)]
 
 
-def generate_asymmetric_votes(num_agents: int = None, **_kwargs):
-    """
-    Generates the votes based on the Asymmetric model.
-    """
-    votes = [list(range(num_agents)) for _ in range(num_agents)]
-    votes_left = [_rotate(vote, shift+1) for shift, vote in enumerate(votes)]
-    votes = [list(range(num_agents)) for _ in range(num_agents)]
-    votes_right = [_rotate(vote, shift) for shift, vote in enumerate(votes)]
-    return [votes_left, votes_right]
-
-
+@register_marriages_independent_culture('group_impartial')
 def generate_group_ic_votes(num_agents: int = None, proportion: int = 0.5, **_kwargs):
     """
     Generates the votes based on the Group Impartial Culture model.
@@ -48,6 +45,7 @@ def generate_group_ic_votes(num_agents: int = None, proportion: int = 0.5, **_kw
     return votes
 
 
+@register_marriages_independent_culture('symmetric')
 def generate_symmetric_votes(num_agents: int = None, **_kwargs):
     """
         Generates the votes based on the Symmetric model.
@@ -86,6 +84,17 @@ def generate_symmetric_votes(num_agents: int = None, **_kwargs):
         votes[i][0] = i
 
     return votes
+
+@register_marriages_dependent_culture('asymmetric')
+def generate_asymmetric_votes(num_agents: int = None, **_kwargs):
+    """
+    Generates the votes based on the Asymmetric model.
+    """
+    votes = [list(range(num_agents)) for _ in range(num_agents)]
+    votes_left = [_rotate(vote, shift+1) for shift, vote in enumerate(votes)]
+    votes = [list(range(num_agents)) for _ in range(num_agents)]
+    votes_right = [_rotate(vote, shift) for shift, vote in enumerate(votes)]
+    return [votes_left, votes_right]
 
 
 def _rotate(vector, shift):
