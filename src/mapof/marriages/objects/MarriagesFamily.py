@@ -46,7 +46,6 @@ class MarriagesFamily(Family):
 
         instances = {}
         _keys = []
-
         for j in range(self.size):
 
             params = copy.deepcopy(self.params)
@@ -65,7 +64,8 @@ class MarriagesFamily(Family):
                                  num_agents=self.num_agents,
                                  label=self.label,
                                  is_imported=False,
-                                 **params)
+                                 params=params
+                                 )
 
             instance.prepare_instance(is_exported=is_exported)
 

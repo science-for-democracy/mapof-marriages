@@ -11,14 +11,20 @@ class Marriages(Instance):
     def __init__(self,
                  experiment_id,
                  instance_id,
-                 alpha=1,
                  culture_id=None,
                  num_agents=None,
                  is_imported=True,
                  votes=None,
+                 params=None,
                  **kwargs):
 
-        super().__init__(experiment_id, instance_id, alpha=alpha, culture_id=culture_id)
+        super().__init__(
+            experiment_id,
+            instance_id,
+            culture_id=culture_id,
+            params=params,
+            **kwargs
+        )
 
         self.num_agents = num_agents
         self.votes = votes
@@ -28,9 +34,8 @@ class Marriages(Instance):
         if is_imported and experiment_id != 'virtual':
             try:
                 self.votes, self.num_agents, self.params, self.culture_id = import_real_instance(self)
-                self.alpha = self.params['alpha']
-            except:
-                pass
+            except Exception:
+                logging.warning(f'Could not import instance {self.instance_id}.')
 
     def get_retrospective_vectors(self):
         if self.retrospetive_vectors is not None:
